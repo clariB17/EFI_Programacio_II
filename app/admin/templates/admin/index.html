@@ -1,0 +1,15 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+    Miniblog | Admin
+{% endblock %}
+
+{% block content %}
+    <div class="text-center font-monospace text-decoration-underline">
+        <h2>Miniblog</h2>
+    </div>
+    <div class="mx-auto col-9 text-center mt-5">
+        <a type="button" class=" btn button usu border border-dark rounded-pill border-5 col-4 m-3 p-2 mt-5" href="{{ url_for('admin.list_posts') }}">Posts</a>
+        <a type="button" class="btn button border border-dark rounded-pill border-5 col-4 m-3 p-2 mt-5 usu" href="{{ url_for('admin.list_users') }}">Usuarios</a>
+    </div>
+{% endblock %}

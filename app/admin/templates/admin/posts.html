@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+    Listado de posteos
+{% endblock %}
+
+{% block content %}
+<div class="">
+    <div class="mx-auto col-9 text-center mt-5 pt-0 border border-dark border-1 m-5 p-5">
+        <h2>Listado de posteos</h2>
+        <ol class="list-group-numbered " >
+        {% for post in posts %}
+            <li class="d-flex align-items-center text-center">
+                <a type="button" class="btn button usu col-12 border-2 border-bottom " href="{{ url_for('admin.update_post_form', post_id=post.id) }}">{{ post.title }}</a>
+            </li>
+        {% endfor %}
+        </ol>
+    </div>
+    <div class="mx-auto col-2">
+        <a type="button" class=" btn button usu border border-dark rounded-pill border-3 m-3 p-2" href="{{ url_for('admin.post_form') }}">+ Nuevo Post</a>
+    </div>
+</div>
+
+{% endblock %}
+

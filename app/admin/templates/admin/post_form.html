@@ -1,0 +1,45 @@
+<!-- CARGAMOS COMO EXTEND LA PLANTILLA BASE -->
+{% extends "base_template.html" %}
+<!-- CARGAMOS CONTENIDO EN EL BLOQUE DE TITULO -->
+{% block title %}
+    {% if form.title.data %}
+        {{ form.title.data }}
+    {% else %}
+        Nuevo Post
+    {% endif %}
+{% endblock %}
+<!-- CARGAMOS CONTENIDO EN EL BLOQUE DE CONTENIDOS -->
+{% block content %}
+<h2 class="text-center fw-bold verde ">Nuevo Post</h2>
+<div class="border border-5 p-5 m-1 ms-5 col-11 flex-fill bd-highlight justify-content-center mt-5">
+    <form class="" action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="">
+            {{ form.title.label(class="text-uppercase fs-6 m-2") }}
+            {{ form.title(class="mh-100 col-12 fs-6 text-capitalize m-2") }}<br>
+            <!-- LE MOSTRAMOS AL USUARIO EL ERROR DE VALIDACIÓN -->
+            {% for error in form.title.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="">
+            {{ form.content.label(class="text-uppercase mt-3 m-2") }}
+            {{ form.content(class="largo overflow-auto m-2 p-6 col-12 d-flex align-content-stretch flex-wrap") }}<br>
+            <!-- LE MOSTRAMOS AL USUARIO EL ERROR DE VALIDACIÓN -->
+            {% for error in form.content.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="d-flex">
+            <div>
+                {{ form.submit(class=" btn btn-outline-success") }}
+            </div>
+    </form>
+            {% if post %}
+            <form action="{{ url_for('admin.delete_post', post_id=post.id) }}" method="post" novalidate>
+                <input class="btn btn-outline-danger ms-2" type="submit" value="Eliminar" />
+            </form>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
