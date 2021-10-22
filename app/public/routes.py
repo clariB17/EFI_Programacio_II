@@ -9,8 +9,7 @@ from app.auth.models import *
 @public_bp.route("/")
 def index():
     posts = Post.get_all()
-    nombre = User.get_all()
-    return render_template("public/index.html", posts=posts, nombre=nombre)
+    return render_template("public/index.html", posts=posts)
 
 # Un slug es una cadena de caracteres alfanuméricos (más el carácter ‘-‘)
 # sin espacios, tildes ni signos de puntuación
