@@ -26,10 +26,10 @@ def create_app():
     # Configuración del email
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
-    app.config['MAIL_USERNAME'] = 'm.boni@itecriocuarto.org.ar'
-    app.config['MAIL_PASSWORD'] = 'C_3584251217'
-    app.config['DONT_REPLY_FROM_EMAIL'] = '(Maria Clara, m.boni@itecriocuarto.org.ar)'
-    app.config['ADMINS'] = ('m.boni@itecriocuarto.org.ar', )
+    app.config['MAIL_USERNAME'] = ''
+    app.config['MAIL_PASSWORD'] = ''
+    app.config['DONT_REPLY_FROM_EMAIL'] = ''
+    app.config['ADMINS'] = ('', )
     app.config['MAIL_USE_TLS'] = True
     app.config['MAIL_DEBUG'] = False
 
