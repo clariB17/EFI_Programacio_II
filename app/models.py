@@ -1,15 +1,16 @@
 import datetime
+from flask import url_for
 from slugify import slugify
 from sqlalchemy.exc import IntegrityError
 
 from app import db
 
-class Libros(db.Model):
+class Post(db.Model):
     # DEFINIMOS LA CLAVE PRIMARIA
     id = db.Column(db.Integer, primary_key=True)
     # SE FIJA LA RELACION ENTRE LA CLASE POST Y LA CLASE USER MEDIANTE EL ATRIBUTO user_id. 
     # ESTE ATRIBUTO ES UNA CLAVE FORANEA, QUE NOS SIRVE PARA REFERENCIAR AL USUARIO QUE ESCRIBIÓ EL POST.
-    autor_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='CASCADE'), nullable=False)
     title = db.Column(db.String(256), nullable=False)
     title_slug = db.Column(db.String(256), unique=True, nullable=False)
     content = db.Column(db.Text)
@@ -17,7 +18,7 @@ class Libros(db.Model):
     comments = db.relationship('Comment', backref='post', lazy=True, cascade='all, delete-orphan', order_by='asc(Comment.created)')
 
     def __repr__(self):
-        return '<Post {self.title}>'
+        return f'<Post {self.title}>'
 
     def save(self):
         if not self.id:
@@ -41,15 +42,15 @@ class Libros(db.Model):
 
     @staticmethod
     def get_by_slug(slug):
-        return Libros.query.filter_by(title_slug=slug).first()
+        return Post.query.filter_by(title_slug=slug).first()
 
     @staticmethod
     def get_by_id(id):
-        return Libros.query.get(id)
+        return Post.query.get(id)
 
     @staticmethod
     def get_all():
-        return Libros.query.all()
+        return Post.query.all()
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
