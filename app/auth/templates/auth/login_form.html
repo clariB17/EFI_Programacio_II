@@ -3,35 +3,28 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="mx-auto border border-dark rounded-pill border-5 p-5 ps-4 m-5 pe-0 pb-1 col-8">
-    <form class="container ms-5" action="" method="post" novalidate>
+    <div>
+        <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
-            <div class="mb-3 ms-5">
-                <label class="form-label me-5 pe-4">
-                    {{ form.email.label }}
-                </label>
-                {{ form.email(size=64) }}
-                <div class="text-center ">
-                    {% for error in form.email.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                    {% endfor %}
-                </div>
+            <div>
+                {{ form.email.label }}
+                {{ form.email }}<br>
+                {% for error in form.email.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
             </div>
-            <div class="ms-5 mb-3">
-                <label class="form-label me-5">
+            <div>
                 {{ form.password.label }}
-                </label>
-                {{ form.password(size=64) }}
-                <div class="text-center ">
-                    {% for error in form.password.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                    {% endfor %}
-                </div>
+                {{ form.password }}<br>
+                {% for error in form.password.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
             </div>
-            <div class="ms-5 me-3">{{ form.remember_me() }} {{ form.remember_me.label }} {{ form.submit(class="btn btn-outline-success") }}
+            <div>{{ form.remember_me() }} {{ form.remember_me.label }}</div>
+            <div>
+                {{ form.submit() }}
             </div>
         </form>
-        <div class="text-center p-1 m-3">¿No tienes cuenta? <a class="btn btn-outline-primary" href="{{ url_for('auth.show_signup_form') }}">Regístrate</a></div>
     </div>
-    
+    <div>¿No tienes cuenta? <a href="{{ url_for('auth.show_signup_form') }}">Regístrate</a></div>
 {% endblock %}

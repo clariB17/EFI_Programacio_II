@@ -1,5 +1,6 @@
 andres
 clara
+<<<<<<< HEAD
 
 consulta profe 26/10
 - sacar tabla biblioteca xq la tabla 
@@ -16,3 +17,6 @@ pregunta para el profe de base de datos
     - Tabla facturas (suprimimos biblioteca).
 
 
+=======
+mi rama
+>>>>>>> e8b49cad981d84b86ca0bba7fbd3e6a0e52ac542

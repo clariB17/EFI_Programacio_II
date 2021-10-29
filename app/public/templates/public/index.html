@@ -1,9 +1,10 @@
 <!-- CARGAMOS COMO EXTEND LA PLANTILLA BASE -->
-{% extends "base_template.html" %}
+{% extends "main.html" %}
 <!-- CARGAMOS CONTENIDO EN EL BLOQUE DE TITULO -->
-{% block title %}Tutorial Flask: Miniblog{% endblock %}
+{% block title %}test{% endblock %}
 <!-- CARGAMOS CONTENIDO EN EL BLOQUE DE CONTENIDOS -->
 {% block content %}
+<<<<<<< HEAD
 <div class="mx-auto col-9 text-center mt-5 pt-0 border border-dark border-1 m-5 p-5">
     <h2>Listado de posteos</h2>
     <ol class="list-group-numbered " >
@@ -19,6 +20,12 @@
     {% endfor %}
     </ul>
 </ol>
+=======
+<div style="background-color: blueviolet;">
+    <h1>
+        {{posts}}
+    </h1>
+>>>>>>> e8b49cad981d84b86ca0bba7fbd3e6a0e52ac542
 </div>
 {% endblock %}
 
