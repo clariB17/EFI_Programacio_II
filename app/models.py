@@ -1,11 +1,7 @@
-from collections import namedtuple
 import datetime
-from enum import auto
-from typing import Coroutine
 from flask import url_for
 from slugify import slugify
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import backref, relationship
 
 from app import db
 
@@ -21,13 +17,17 @@ class Libros(db.Model):
     ruta_libro = db.Column(db.String(150), nullable=False)
 
     #key
-    id_genero = db.relationship('Genero', backref = 'libros', lazy=True, cascade='all, delete-orpan', order_by='asc(Genero.created)')
-    id_autor = db.relationship('Autor', backref = 'libros', lazy=True, cascade='all, delete-orpan', order_by='asc(Autor.created)')
-    id_idioma = db.relationship('Idioma', backref = 'libros', lazy=True, cascade='all, delete-orpan', order_by='asc(Idioma.created)')
+    id_genero = db.Column(db.Integer, db.ForeignKey('genero.id'), nullable=False)
+    id_autor = db.Column(db.Integer, db.ForeignKey('autor.id'), nullable=False)
+    id_idioma = db.Column(db.Integer, db.ForeignKey('idioma.id'), nullable=False)
+
+    deseados = db.relationship('Deseados', backref = 'libros', lazy=True)
+    puntuacion = db.relationship('Puntuacion', backref = 'libros', lazy=True)
+    detalle_factura = db.relationship('Detalle_factura', backref = 'libros', lazy=True)
 
     def __repr__(self):
         return f'<Libro {self.title}>'
-
+    
     def save(self):
         if not self.id:
             db.session.add(self)
@@ -58,9 +58,12 @@ class Libros(db.Model):
 
 
 # sobre el libro
-class Genero():
+class Genero(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+
+    # key
+    libros = db.relationship('Libros', backref = 'genero', lazy=True,cascade='all, delete-orphan', order_by='asc(Genero.created)')
 
     def __init__(self, name):
         self.name = name
@@ -85,11 +88,13 @@ class Genero():
     def get_all():
         return Genero.query.all()
 
-class Puntuacion():
+class Puntuacion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer)
-    id_libro = db.relationship('Libro', backref = 'puntuacion', lazy=True, cascade='all, delete-orpan')
 
+    # key
+    id_libros = db.Column(db.Integer, db.ForeignKey('libros.id'), nullable=False)
+    
     def __init__(self, number, id_libro):
         self.number = number
         self.id_libro = id_libro
@@ -114,15 +119,19 @@ class Puntuacion():
     def get_all():
         return Puntuacion.query.all()
 
-class Autor():
+class Autor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     cuit = db.Column(db.String(11), nullable = True)
     name = db.Column(db.String(50), nullable = False)
     lastname = db.Column(db.String(50), nullable = True)
     date_of_birth = db.Column(db.DateTime)
-    id_pais = db.relationship('Pais', backref = 'autor', lazy=True, cascade='all, delete-orpan', order_by='asc(pais.created)')
-    id_formacion = db.relationship('Formacion', backref = 'autor', lazy=True, cascade='all, delete-orpan', order_by='asc(Formacion.created)')
+    formacion = db.Column(db.String(100), nullable = True)
     rute_foto = db.Column(db.String(150), nullable = True)
+
+    # key
+    libros = db.relationship('Libros', backref = 'autor', lazy=True, order_by='asc(Autor.created)')
+
+    id_pais = db.Column(db.Integer, db.ForeignKey('pais.id'), nullable=False)
 
     def __init__(self, name, id_pais):
         self.name = name
@@ -148,9 +157,12 @@ class Autor():
     def get_all():
         return Autor.query.all()
 
-class Pais():
+class Pais(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String, nullable = False)
+    name = db.Column(db.String(50), nullable = False)
+
+    # key
+    pais = db.relationship('Autor', backref = 'pais', lazy=True, order_by='asc(pais.created)')
 
     def __init__(self, name):
         self.name = name
@@ -175,9 +187,12 @@ class Pais():
     def get_all():
         return Puntuacion.query.all()
 
-class Idioma():
+class Idioma(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String, nullable = False)
+    name = db.Column(db.String(50), nullable = False)
+
+    # key
+    libros = db.relationship('Libros', backref = 'idioma', lazy=True, order_by='asc(Idioma.created)')
 
     def __init__(self, name):
         self.name = name
@@ -204,12 +219,14 @@ class Idioma():
 
 
 # sobre usuario
-from auth.models import User
+from app.auth.models import User
 
-class Deseados():
+class Deseados(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    id_libro = db.relationship('Libro', backref = 'deseados', lazy=True, cascade='all, delete-orpan')
-    id_user = db.relationship('User', backref = 'deseados', lazy=True, cascade='all, delete-orpan')
+
+    # key
+    id_libros = db.Column(db.Integer, db.ForeignKey('libros.id'), nullable=False)
+    id_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __init__(self, name, id_user = None):
         self.name = name
@@ -231,12 +248,16 @@ class Deseados():
     def get_by_id_user(id_user):
         return Deseados.query.filter_by(id_user=id_user).all()
 
-class Factura():
+class Factura(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    id_user = db.relationship('User', backref = 'deseados', lazy=True, cascade='all, delete-orpan')
     fecha = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     monto = db.Column(db.Float(10.2), nullable = False)
     anulado = db.Column(db.Boolean, nullable=False, default=False)
+
+    # key
+    id_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    detalle_factura = db.relationship('Detalle_factura', backref = 'factura', lazy=True)
 
     def __init__(self, monto, id_user):
         self.monto = monto
@@ -262,13 +283,17 @@ class Factura():
     def get_all():
         return Factura.query.all()
 
-class Detalle_factura():
+class Detalle_factura(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    id_factura = db.relationship('Factura', backref = 'detalle_factura', lazy=True, cascade='all, delete-orpan')
-    id_libro = db.relationship('Libro', backref = 'detalle_factura', lazy=True, cascade='all, delete-orpan')
     cantidad = db.Column(db.Integer)
     monto = db.Column(db.Float(10.2), nullable = False)
     anulado = db.Column(db.Boolean, nullable=False, default=False)
+
+    # key
+    id_factura = db.Column(db.Integer, db.ForeignKey('factura.id'), nullable=False)
+    id_libros = db.Column(db.Integer, db.ForeignKey('libros.id'), nullable=False)
+
+    libro_actual = db.relationship('Libro_actual', backref = 'detalle_factura', lazy=True)
 
     def __init__(self, monto, id_factura):
         self.monto = monto
@@ -294,10 +319,12 @@ class Detalle_factura():
     def get_all():
         return Detalle_factura.query.all()
 
-class Libro_actual():
+class Libro_actual(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    id_detalle = db.relationship('Detalle_Factura', backref = 'libro_actual', lazy=True, cascade='all, delete-orpan')
     num_pagina = db.Column(db.Integer)
+
+    # key
+    id_detalle_factura = db.Column(db.Integer, db.ForeignKey('detalle_factura.id'), nullable=False)
 
     def __init__(self, num_pagina, id_detalle):
         self.num_pagina = num_pagina

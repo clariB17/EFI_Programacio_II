@@ -1,12 +1,10 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from app import db
 
 # AHORA LA CLASE USER HEREDA LA CLASE MODEL DE SQLALCHEMY
 class User(db.Model, UserMixin):
 
-    __tablename__ = 'Users'
     # DEFINIMOS LA CLAVE PRIMARIA
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -14,6 +12,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
+
+    deseados = db.relationship('Deseados', backref = 'user', lazy=True)
+    factura = db.relationship('Factura', backref = 'user', lazy=True)
 
     def __init__(self, name, username):
         self.name = name
