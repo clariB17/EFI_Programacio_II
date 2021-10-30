@@ -293,3 +293,32 @@ class Detalle_factura():
     @staticmethod
     def get_all():
         return Detalle_factura.query.all()
+
+class Libro_actual():
+    id = db.Column(db.Integer, primary_key = True)
+    id_detalle = db.relationship('Detalle_Factura', backref = 'libro_actual', lazy=True, cascade='all, delete-orpan')
+    num_pagina = db.Column(db.Integer)
+
+    def __init__(self, num_pagina, id_detalle):
+        self.num_pagina = num_pagina
+        self.id_detalle = id_detalle
+
+    def __repr__(self):
+        return '<num_pagina {self.num_pagina}'
+
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    
+    @staticmethod
+    def get_by_id():
+        return Libro_actual.query.get(id)
+
+    @staticmethod
+    def get_all():
+        return Libro_actual.query.all()
