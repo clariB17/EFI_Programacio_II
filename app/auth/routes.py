@@ -10,12 +10,53 @@ from .models import User
 
 @auth_bp.route("/signup/", methods=["GET", "POST"])
 def show_signup_form():
-    return render_template("auth/signup_form.html")
+    if current_user.is_authenticated:
+        return redirect(url_for('public.index'))
+    form = SignupForm()
+    error = None
+    if form.validate_on_submit():
+        name = form.name.data
+        username = form.username.data
+        password = form.password.data
+        # Comprobamos que no hay ya un usuario con ese username
+        user = User.get_by_username(username)
+        if user is not None:
+            error = f'El username {username} ya está siendo utilizado por otro usuario'
+        else:
+            # Creamos el usuario y lo guardamos
+            user = User(name=name, username=username)
+            user.set_password(password)
+            user.save()
+            # Dejamos al usuario logueado
+            login_user(user, remember=True)
+            next_page = request.args.get('next', None)
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('public.index')
+            return redirect(next_page)
+    return render_template("auth/signup_form.html", form=form, error=error)
+
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('auth/login_form.html', )
+    # PRIMERO COMPROBAMOS SI EL USUARIO ESTÁ AUTENTICADO
+    if current_user.is_authenticated:
+        return redirect(url_for('public.index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.get_by_username(form.username.data)
+        # SI EXISTE UN USUARIO CON ESE username Y LA CLAVE ES CORRECTA, 
+        # AUTENTICAMOS EL USUARIO USANDO EL METODO login_user
+        if user is not None and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            next_page = request.args.get('next')
+            # COMPROBAMOS SI RECIBIMOS EL PARAMETRO NEXT. 
+            # ESTO PASA CUANDO SE INTENTA INGRESAR A UNA PAGINA PROTEGIDA SIN ESTAR AUTENTICADO.
+            # SI NO SE RECIBE EL NEXT, REDIRIGIMOS EL USUARIO A LA PAGINA DE INICIO
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('public.index')
+            return redirect(next_page)
+    return render_template('auth/login_form.html', form=form)
 
 
 @auth_bp.route('/logout')

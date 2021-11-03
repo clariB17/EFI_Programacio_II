@@ -63,7 +63,7 @@ class Genero(db.Model):
     name = db.Column(db.String(50), nullable=False)
 
     # key
-    libros = db.relationship('Libros', backref = 'genero', lazy=True,cascade='all, delete-orphan', order_by='asc(Genero.created)')
+    libros = db.relationship('Libros', backref = 'genero', lazy=True)
 
     def __init__(self, name):
         self.name = name
@@ -129,7 +129,7 @@ class Autor(db.Model):
     rute_foto = db.Column(db.String(150), nullable = True)
 
     # key
-    libros = db.relationship('Libros', backref = 'autor', lazy=True, order_by='asc(Autor.created)')
+    libros = db.relationship('Libros', backref = 'autor', lazy=True)
 
     id_pais = db.Column(db.Integer, db.ForeignKey('pais.id'), nullable=False)
 
@@ -162,7 +162,7 @@ class Pais(db.Model):
     name = db.Column(db.String(50), nullable = False)
 
     # key
-    pais = db.relationship('Autor', backref = 'pais', lazy=True, order_by='asc(pais.created)')
+    pais = db.relationship('Autor', backref = 'pais', lazy=True)
 
     def __init__(self, name):
         self.name = name
@@ -192,7 +192,7 @@ class Idioma(db.Model):
     name = db.Column(db.String(50), nullable = False)
 
     # key
-    libros = db.relationship('Libros', backref = 'idioma', lazy=True, order_by='asc(Idioma.created)')
+    libros = db.relationship('Libros', backref = 'idioma', lazy=True)
 
     def __init__(self, name):
         self.name = name
@@ -219,7 +219,6 @@ class Idioma(db.Model):
 
 
 # sobre usuario
-from app.auth.models import User
 
 class Deseados(db.Model):
     id = db.Column(db.Integer, primary_key = True)
