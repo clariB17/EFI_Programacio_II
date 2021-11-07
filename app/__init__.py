@@ -18,21 +18,7 @@ def create_app():
     # LE DECIMOS A LA APP DONDE SE ENCUENTRA LA BASE DE DATOS
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://BD2021:BD2021itec@143.198.156.171/editorial'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-<<<<<<< HEAD
-
-    # Configuración del email
-    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-    app.config['MAIL_PORT'] = 587
-    app.config['MAIL_USERNAME'] = ''
-    app.config['MAIL_PASSWORD'] = ''
-    app.config['DONT_REPLY_FROM_EMAIL'] = ''
-    app.config['ADMINS'] = ('', )
-    app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_DEBUG'] = False
-
-=======
     
->>>>>>> e8b49cad981d84b86ca0bba7fbd3e6a0e52ac542
     login_manager.init_app(app)
     login_manager.login_view = "login"
 

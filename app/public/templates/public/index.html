@@ -4,29 +4,12 @@
 {% block title %}test{% endblock %}
 <!-- CARGAMOS CONTENIDO EN EL BLOQUE DE CONTENIDOS -->
 {% block content %}
-<<<<<<< HEAD
-<div class="mx-auto col-9 text-center mt-5 pt-0 border border-dark border-1 m-5 p-5">
-    <h2>Listado de posteos</h2>
-    <ol class="list-group-numbered " >
-    <ul>
-    {% for post in posts %}
-        <li class="d-flex align-items-center text-center">
-            <a type="button" class="btn button usu col-12 border-2 border-bottom " href="{{ url_for('public.show_post', slug=post.title_slug) }}">
-                {{ post.title }} ({{post.user_id}}) <span class="postCreated">({{ post.created|datetime }})</span>
-            </a>
-        </li>
-    {% else %}
-        <li>No hay entradas</li>
-    {% endfor %}
-    </ul>
-</ol>
-=======
-<div style="background-color: blueviolet;">
+<div style="background-color: rgb(226, 116, 43);">
     <h1>
-        asdf
+        Holaaa 
+
     </h1>
->>>>>>> e8b49cad981d84b86ca0bba7fbd3e6a0e52ac542
-</div>
+¿</div>
 {% endblock %}
 
 
