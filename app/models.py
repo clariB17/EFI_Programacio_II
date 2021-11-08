@@ -5,12 +5,13 @@ from sqlalchemy.exc import IntegrityError
 
 from app import db
 
-class Libros(db.Model):
+class Libro(db.Model):
      # DEFINIMOS LA CLAVE PRIMARIA
     id = db.Column(db.Integer, primary_key=True)
     # SE FIJA LA RELACION ENTRE LA CLASE Libro Y LA CLASE USER MEDIANTE EL ATRIBUTO user_id. 
     # ESTE ATRIBUTO ES UNA CLAVE FORANEA, QUE NOS SIRVE PARA REFERENCIAR AL USUARIO QUE ESCRIBIÓ EL Libro.
-    title = db.Column(db.String(256), nullable = False)
+    titulo = db.Column(db.String(256), nullable = False)
+    ISBN = db.Column(db.String(50), nullable = False)
     precio = db.Column(db.Float(10.2), nullable = False)
     fecha_publicacion = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     ruta_foto = db.Column(db.String(150), nullable=True)
@@ -21,9 +22,9 @@ class Libros(db.Model):
     id_autor = db.Column(db.Integer, db.ForeignKey('autor.id'), nullable=False)
     id_idioma = db.Column(db.Integer, db.ForeignKey('idioma.id'), nullable=False)
 
-    deseados = db.relationship('Deseados', backref = 'libros', lazy=True)
-    puntuacion = db.relationship('Puntuacion', backref = 'libros', lazy=True)
-    detalle_factura = db.relationship('Detalle_factura', backref = 'libros', lazy=True)
+    deseados = db.relationship('Deseados', backref = 'libro', lazy=True)
+    puntuacion = db.relationship('Puntuacion', backref = 'libro', lazy=True)
+    detalle_factura = db.relationship('Detalle_factura', backref = 'libro', lazy=True)
 
     def __repr__(self):
         return f'<Libro {self.title}>'
@@ -50,26 +51,27 @@ class Libros(db.Model):
 
     @staticmethod
     def get_by_id(id):
-        return Libros.query.get(id)
+        return libro.query.get(id)
 
     @staticmethod
     def get_all():
-        return Libros.query.all()
+        return libro.query.all()
 
 
 # sobre el libro
 class Genero(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    nombre = db.Column(db.String(50), nullable=False)
+    codigo = db.Column(db.String(3), nullable=False)
 
     # key
-    libros = db.relationship('Libros', backref = 'genero', lazy=True)
+    libro = db.relationship('libro', backref = 'genero', lazy=True)
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, nombre):
+        self.nombre = nombre
 
     def __repr__(self):
-        return '<Genero {self.name}'
+        return '<Genero {self.nombre}'
 
     def save(self):
         if not self.id:
@@ -90,10 +92,10 @@ class Genero(db.Model):
 
 class Puntuacion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.Integer)
+    numero = db.Column(db.Integer)
 
     # key
-    id_libros = db.Column(db.Integer, db.ForeignKey('libros.id'), nullable=False)
+    id_libro = db.Column(db.Integer, db.ForeignKey('libro.id'), nullable=False)
     
     def __init__(self, number, id_libro):
         self.number = number
@@ -122,23 +124,22 @@ class Puntuacion(db.Model):
 class Autor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     cuit = db.Column(db.String(11), nullable = True)
-    name = db.Column(db.String(50), nullable = False)
-    lastname = db.Column(db.String(50), nullable = True)
-    date_of_birth = db.Column(db.DateTime)
-    formacion = db.Column(db.String(100), nullable = True)
-    rute_foto = db.Column(db.String(150), nullable = True)
+    nombre = db.Column(db.String(50), nullable = False)
+    apellido = db.Column(db.String(50), nullable = True)
+    fecha_de_nacimiento = db.Column(db.DateTime)
+    ruta_foto = db.Column(db.String(150), nullable = True)
 
     # key
-    libros = db.relationship('Libros', backref = 'autor', lazy=True)
+    libro = db.relationship('libro', backref = 'autor', lazy=True)
 
     id_pais = db.Column(db.Integer, db.ForeignKey('pais.id'), nullable=False)
 
-    def __init__(self, name, id_pais):
-        self.name = name
+    def __init__(self, nombre, id_pais):
+        self.nombre = nombre
         self.id_pais = id_pais
 
     def __repr__(self):
-        return '<autor {self.name}'
+        return '<autor {self.nombre}'
 
     def save(self):
         if not self.id:
@@ -159,16 +160,18 @@ class Autor(db.Model):
 
 class Pais(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(50), nullable = False)
+    nombre = db.Column(db.String(100), nullable = False) 
+    codigo = db.Column(db.String(5), nullable=False)
+    continente = db.Column(db.String(100), nullable=False)
 
     # key
     pais = db.relationship('Autor', backref = 'pais', lazy=True)
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, nombre):
+        self.nombre = nombre
 
     def __repr__(self):
-        return '<pais {self.name}'
+        return '<pais {self.nombre}'
 
     def save(self):
         if not self.id:
@@ -189,16 +192,17 @@ class Pais(db.Model):
 
 class Idioma(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(50), nullable = False)
+    nombre = db.Column(db.String(50), nullable = False)
+    codigo = db.Column(db.String(5), nullable=False)
 
     # key
-    libros = db.relationship('Libros', backref = 'idioma', lazy=True)
+    libro = db.relationship('libro', backref = 'idioma', lazy=True)
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, nombre):
+        self.nombre = nombre
 
     def __repr__(self):
-        return '<idioma {self.name}'
+        return '<idioma {self.nombre}'
 
     def save(self):
         if not self.id:
@@ -224,11 +228,11 @@ class Deseados(db.Model):
     id = db.Column(db.Integer, primary_key = True)
 
     # key
-    id_libros = db.Column(db.Integer, db.ForeignKey('libros.id'), nullable=False)
+    id_libro = db.Column(db.Integer, db.ForeignKey('libro.id'), nullable=False)
     id_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self, name, id_user = None):
-        self.name = name
+    def __init__(self, nombre, id_user = None):
+        self.nombre = nombre
         self.id_user = id_user
 
     def __repr__(self):
@@ -286,11 +290,11 @@ class Detalle_factura(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     cantidad = db.Column(db.Integer)
     monto = db.Column(db.Float(10.2), nullable = False)
-    anulado = db.Column(db.Boolean, nullable=False, default=False)
+    anulado = db.Column(db.Boolean, nullable=False, default=0)
 
     # key
     id_factura = db.Column(db.Integer, db.ForeignKey('factura.id'), nullable=False)
-    id_libros = db.Column(db.Integer, db.ForeignKey('libros.id'), nullable=False)
+    id_libro = db.Column(db.Integer, db.ForeignKey('libro.id'), nullable=False)
 
     libro_actual = db.relationship('Libro_actual', backref = 'detalle_factura', lazy=True)
 
