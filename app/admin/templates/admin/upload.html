@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block title %}
+    Miniblog | Admin
+{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="ourfile">
+        <input type="submit" value="Subir">
+    </form>
+{% endblock %}
