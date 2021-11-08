@@ -51,11 +51,11 @@ class Libro(db.Model):
 
     @staticmethod
     def get_by_id(id):
-        return libro.query.get(id)
+        return Libro.query.get(id)
 
     @staticmethod
     def get_all():
-        return libro.query.all()
+        return Libro.query.all()
 
 
 # sobre el libro
