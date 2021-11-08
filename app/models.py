@@ -65,7 +65,7 @@ class Genero(db.Model):
     codigo = db.Column(db.String(3), nullable=False)
 
     # key
-    libro = db.relationship('libro', backref = 'genero', lazy=True)
+    libro = db.relationship('Libro', backref = 'genero', lazy=True)
 
     def __init__(self, nombre):
         self.nombre = nombre
@@ -130,7 +130,7 @@ class Autor(db.Model):
     ruta_foto = db.Column(db.String(150), nullable = True)
 
     # key
-    libro = db.relationship('libro', backref = 'autor', lazy=True)
+    libro = db.relationship('Libro', backref = 'autor', lazy=True)
 
     id_pais = db.Column(db.Integer, db.ForeignKey('pais.id'), nullable=False)
 
@@ -165,7 +165,7 @@ class Pais(db.Model):
     continente = db.Column(db.String(100), nullable=False)
 
     # key
-    pais = db.relationship('Autor', backref = 'pais', lazy=True)
+    autor = db.relationship('Autor', backref = 'pais', lazy=True)
 
     def __init__(self, nombre):
         self.nombre = nombre
@@ -196,7 +196,7 @@ class Idioma(db.Model):
     codigo = db.Column(db.String(5), nullable=False)
 
     # key
-    libro = db.relationship('libro', backref = 'idioma', lazy=True)
+    libro = db.relationship('Libro', backref = 'idioma', lazy=True)
 
     def __init__(self, nombre):
         self.nombre = nombre

@@ -5,7 +5,6 @@ from app import db
 # AHORA LA CLASE USER HEREDA LA CLASE MODEL DE SQLALCHEMY
 class User(db.Model, UserMixin):
 
-    
     # DEFINIMOS LA CLAVE PRIMARIA
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
