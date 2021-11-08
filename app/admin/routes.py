@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename, send_file, send_from_directory
 import os
 
 
-FOLDER = os.path.abspath('app/static/libros')
+FOLDER = os.path.abspath('app/static/Libro')
 EXTENSIONS = set(['epub', 'pdf'])
 
 
@@ -54,7 +54,7 @@ def index():
 @login_required
 @admin_required
 def list_posts():
-    posts = Libros.get_all()
+    posts = Libro.get_all()
     return render_template("admin/posts.html", posts=posts)
 
 @admin_bp.route("/admin/post/", methods=['GET', 'POST'])
@@ -66,7 +66,7 @@ def post_form():
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
-        post = Libros(user_id=current_user.id, title=title, content=content)
+        post = Libro(user_id=current_user.id, title=title, content=content)
         post.save()
         return redirect(url_for('admin.list_posts'))
     return render_template("admin/post_form.html", form=form)
@@ -76,7 +76,7 @@ def post_form():
 @admin_required
 def update_post_form(post_id):
     #   Actualiza un post existente   #
-    post = Libros.get_by_id(post_id)
+    post = Libro.get_by_id(post_id)
     if post is None:
         abort(404)
     # Crea un formulario inicializando los campos con
@@ -94,7 +94,7 @@ def update_post_form(post_id):
 @login_required
 @admin_required
 def delete_post(post_id):
-    post = Libros.get_by_id(post_id)
+    post = Libro.get_by_id(post_id)
     if post is None:
         abort(404)
     post.delete()
