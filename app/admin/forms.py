@@ -14,3 +14,5 @@ class PostForm(FlaskForm):
 class UserAdminForm(FlaskForm):
     is_admin = BooleanField('Administrador')
     submit = SubmitField('Guardar')
+
+    
