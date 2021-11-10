@@ -5,8 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="ourfile">
-        <input type="submit" value="Subir">
+    <form action="{{ url_for('admin.upload') }}" method="POST" enctype="multipart/form-data">
+        {{  form.hidden_tag()  }}
+        {{  form.libro()  }}
+        {{  form.submit()  }}
+        {{  form.genero()  }}
+        {{  form.precio()  }}
     </form>
 {% endblock %}
