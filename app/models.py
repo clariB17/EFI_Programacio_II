@@ -85,7 +85,7 @@ class Genero(db.Model):
     @staticmethod
     def get_by_id(id):
         return Genero.query.get(id)
-    
+
     @staticmethod
     def get_all():
         return Genero.query.all()
