@@ -6,6 +6,15 @@ from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Length
 
 
+class Libros_upload(FlaskForm):
+    pass
+
+
+
+class recomendaciones(FlaskForm):
+    pass #
+
+
 class PostForm(FlaskForm):
     title = StringField('Título', validators=[DataRequired(), Length(max=128)])
     content = TextAreaField('Contenido')
@@ -15,4 +24,7 @@ class UserAdminForm(FlaskForm):
     is_admin = BooleanField('Administrador')
     submit = SubmitField('Guardar')
 
+class autores(FlaskForm):
     
+    pass
+

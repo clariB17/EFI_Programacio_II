@@ -47,3 +47,13 @@
     color: #d8d842;
     
 }
+
+.adm {
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    
+}
+
+.adm:hover{
+    background-color: cadetblue;
+}
