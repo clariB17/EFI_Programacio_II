@@ -1,0 +1,62 @@
+.fondo {
+    background-image: url(image-from-rawpixel-id-593401-jpeg.jpg);
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+.user-info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.usu {
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    
+}
+
+.usu:hover{
+    background-color: cadetblue;
+    border: solid black 0.1ch;
+}
+
+.largo{
+    height: 100px
+}
+
+.gris{
+    background-color: rgb(199, 194, 194);
+}
+.dropfondo{
+    background-color: gray;    
+}
+.si:hover{
+    background-color: rgb(247, 10, 10);
+}
+.sii:hover{
+    background-color: rgb(10, 247, 42);
+}
+.siii:hover{
+    background-color: rgb(10, 34, 247);
+}
+
+.stars:hover{
+    color: #d8d842;
+    
+}
+
+.adm {
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    
+}
+
+.adm:hover{
+    background-color: cadetblue;
+}
+
+.questo:hover {
+    -webkit-animation: shake 1s;
+    animation: shake 1s;
+}

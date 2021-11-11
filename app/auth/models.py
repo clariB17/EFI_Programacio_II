@@ -41,3 +41,7 @@ class User(db.Model, UserMixin):
     # CAMBIAMOS get_user(username) POR EL METODO get_by_username(username) DE LA CLASE USER
     def get_by_username(username):
         return User.query.filter_by(username=username).first()
+    
+    @staticmethod
+    def get_all():
+        return User.query.all()
