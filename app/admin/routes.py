@@ -1,43 +1,61 @@
-from flask import app, render_template, redirect, url_for, abort, request
+from flask import app, render_template, redirect, url_for, abort, request, send_file
 from flask_login import login_required, current_user
 from app.auth.decorators import admin_required
 from app.auth.models import User
 from app.models import Libro
 from . import admin_bp
-from .forms import PostForm, UserAdminForm
+from .forms import PostForm, UserAdminForm, Libros_upload, Autores_upload
 
-from werkzeug.utils import secure_filename, send_file, send_from_directory
+from werkzeug.utils import secure_filename
 import os
 
+from app import admin
 
-FOLDER = os.path.abspath('app/static/Libro')
-EXTENSIONS = set(['epub', 'pdf'])
+
+FOLDER = os.path.abspath('app/static/libros')
+EXTENSIONS_LIB = set(['epub', 'pdf'])
+EXTENSIONS_IMG = set(['epub', 'pdf'])
 
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS_LIB
 
-@admin_bp.route("/admin/upload/", methods=['GET', 'POST'])
-def upload():
+@admin_bp.route("/admin/libro_upload/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def libro_upload():
+    form = Libros_upload()
     if request.method == 'POST':
-        if 'ourfile' not in request.files:
-            return 'the form has no file part.'
-        f = request.files['ourfile']
-        if f.filename == '':
-            return 'no file selected'
-        if f and allowed_file(f.filename):
-            filename = secure_filename(f.filename)
-            f.save(os.path.join(FOLDER, filename))
-            return redirect(url_for('admin.get_file', filename=filename))
-        return 'file not allowed'
-    return render_template('admin/upload.html')
+        if form.validate_on_submit():
+            if 'ourfile' not in request.files:
+                return 'the form has no file part.'
+            f = request.files['ourfile']
+            if f.filename == '':
+                return 'no file selected'
+            if f and allowed_file(f.filename):
+                filename = secure_filename(f.filename)
+                f.save(os.path.join(FOLDER, filename))
+                return redirect(url_for('admin.get_file', filename=filename))
+            return 'file not allowed'
+    return render_template('admin/libro_upload.html', form=form)
 
+
+@admin_bp.route("/admin/autor_upload/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def autor_upload():
+    form = Autores_upload()
+    if request.method == 'POST':
+        pass
+    return render_template('/admin/autor_upload.html', form=form)
+    
 
 @admin_bp.route("/admin/uploads/<filename>")
 def get_file(filename):
-    a = os.path.join(FOLDER, filename)
-    print(a)
-    return send_file(a, as_attachment=True, environ=admin_bp)
+    file = os.path.join(FOLDER, filename)
+    return send_file(file)
+
+
 
 
 

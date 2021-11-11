@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+
+{% block title %}
+    Miniblog | Admin
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('admin.libro_upload') }}" method="POST" enctype="multipart/form-data">
+        {{  form.hidden_tag() }}
+        {{  form.titulo.label()  }}
+        {{  form.titulo()  }} <br>
+        {{  form.ISBN.label()  }}
+        {{  form.ISBN()  }} <br>
+        {{  form.genero.label()  }}
+        {{  form.genero()  }} <br>
+        {{  form.autor.label()  }}
+        {{  form.autor()  }} <br>
+        {{  form.idioma.label()  }}
+        {{  form.idioma()  }} <br>
+        {{  form.precio.label()  }}
+        {{  form.precio()  }} <br>
+        {{  form.libro.label()  }}
+        {{  form.libro()  }} <br>
+        {{  form.imagen.label()  }}
+        {{  form.imagen()  }} <br>
+        {{  form.submit()  }} <br>
+    </form>
+{% endblock %}

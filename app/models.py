@@ -85,7 +85,7 @@ class Genero(db.Model):
     @staticmethod
     def get_by_id(id):
         return Genero.query.get(id)
-    
+
     @staticmethod
     def get_all():
         return Genero.query.all()
@@ -123,7 +123,6 @@ class Puntuacion(db.Model):
 
 class Autor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    cuit = db.Column(db.String(11), nullable = True)
     nombre = db.Column(db.String(50), nullable = False)
     apellido = db.Column(db.String(50), nullable = True)
     fecha_de_nacimiento = db.Column(db.DateTime)
