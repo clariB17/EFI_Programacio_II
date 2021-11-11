@@ -19,8 +19,8 @@
             <button class="btn btn-lg p-0 m-0 usu" type="button">
                 <a href="{{ url_for('public.index') }}"><img class="d-none d-sm-block" src="{{url_for('static', filename='img/books_icon.ico')}}" height="50" width="50"><img class="d-block d-sm-none" src="{{url_for('static', filename='img/books_icon.ico')}}" height="40" width="40"></a>
             </button>
-            <button type="button" class="btn btn-lg btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">
-                <h6 class="d-none d-md-block" >Cantaro de piedra<i class="bi bi-list p-1 m-1"></h6></i><i class="bi bi-list d-block d-md-none p-0 m-0"></i>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+                <h6 class="d-none d-md-block" >Cantaro de piedra</h6><i class="bi bi-list d-block d-md-none p-0 m-0 me-0"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-dark row">
                 <div class="col-12 m-1">
@@ -36,11 +36,11 @@
             <a a type="button" class="btn btn-outline-success m-1" href="{{ url_for('auth.login') }}">Login</a>
             <a type="button" class="btn btn-outline-primary m-1" href="{{ url_for('auth.show_signup_form') }}">Registrar</a>
         {% else %}
-            <h5 class="mt-3 m-2">{{ current_user.name}}</h5>
+            <h5 class="mt-2 m-2 d-none d-sm-block">{{ current_user.name}}</h5>
             {% if current_user.is_admin %}
-                <a type="button" class="btn btn-outline-primary m-1" href="{{ url_for('admin.index') }}"><h6 class="d-none d-sm-block">Admin</h6><i class="d-block d-sm-none bi bi-person-lines-fill"></i></a>
+                <a type="button" class="btn btn-outline-primary m-1 mt-0" href="{{ url_for('admin.index') }}"><h6 class="d-none d-sm-block">Admin</h6><i class="d-block d-sm-none bi bi-person-lines-fill"></i></a>
             {% endif %}
-            <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+            <a type="button" class="btn btn-outline-danger ms-2 m-1 mt-0" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
         {% endif %}
         </div>
     </div>
