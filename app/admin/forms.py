@@ -7,7 +7,7 @@ from wtforms.validators import DataRequired, Length
 
 
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from app.models import Genero, Autor, Idioma, Libro, Pais
+from app.models import Genero, Autor, Idioma, Pais
 
 
 class Libros_upload(FlaskForm): 
@@ -27,10 +27,6 @@ class Autores_upload(FlaskForm):
     fecha_de_nacimiento = DateField(label='fecha de nacimiento', )
     imagen = FileField(label='Adjuntar imagen')
     pais = QuerySelectField(label='Pais', query_factory=Pais.get_all, get_label='nombre', allow_blank=True)
-    submit = SubmitField(label='Guardar')
-
-class Recomendado:
-    libro = QuerySelectField(label='Seleccione libro', query_factory=Libro.get_all, get_label='nombre', allow_blank=True)
     submit = SubmitField(label='Guardar')
 
 

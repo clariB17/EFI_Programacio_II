@@ -1,4 +1,5 @@
 import datetime
+from enum import unique
 from flask import url_for
 from slugify import slugify
 from sqlalchemy.exc import IntegrityError
@@ -11,7 +12,7 @@ class Libro(db.Model):
     # SE FIJA LA RELACION ENTRE LA CLASE Libro Y LA CLASE USER MEDIANTE EL ATRIBUTO user_id. 
     # ESTE ATRIBUTO ES UNA CLAVE FORANEA, QUE NOS SIRVE PARA REFERENCIAR AL USUARIO QUE ESCRIBIÓ EL Libro.
     titulo = db.Column(db.String(256), nullable = False)
-    ISBN = db.Column(db.String(50), nullable = False)
+    ISBN = db.Column(db.String(50), nullable = False, unique=True)
     precio = db.Column(db.Float(10.2), nullable = False)
     fecha_publicacion = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     ruta_foto = db.Column(db.String(150), nullable=True)
@@ -26,24 +27,14 @@ class Libro(db.Model):
     puntuacion = db.relationship('Puntuacion', backref = 'libro', lazy=True)
     detalle_factura = db.relationship('Detalle_factura', backref = 'libro', lazy=True)
 
+
     def __repr__(self):
-        return f'<Libro {self.title}>'
+        return f'<Libro {self.titulo}>'
     
     def save(self):
         if not self.id:
             db.session.add(self)
-        if not self.title_slug:
-            self.title_slug = slugify(self.title)
-
-        saved = False
-        count = 0
-        while not saved:
-            try:
-                db.session.commit()
-                saved = True
-            except IntegrityError:
-                count += 1
-                self.title_slug = f'{self.title_slug}-{count}'
+        db.session.commit()
 
     def delete(self):
         db.session.delete(self)
@@ -52,6 +43,10 @@ class Libro(db.Model):
     @staticmethod
     def get_by_id(id):
         return Libro.query.get(id)
+
+    @staticmethod
+    def get_by_name(name):
+        return Libro.query.filter_by(ISBN=name).first() 
 
     @staticmethod
     def get_all():
@@ -85,6 +80,10 @@ class Genero(db.Model):
     @staticmethod
     def get_by_id(id):
         return Genero.query.get(id)
+
+    @staticmethod
+    def get_by_name(name):
+        return Genero.query.filter_by(nombre=name).first()  
 
     @staticmethod
     def get_all():
@@ -152,6 +151,10 @@ class Autor(db.Model):
     @staticmethod
     def get_by_id():
         return Autor.query.get(id)
+    
+    @staticmethod
+    def get_by_name(name):
+        return Autor.query.filter_by(nombre=name).first() 
 
     @staticmethod
     def get_all():
@@ -184,6 +187,10 @@ class Pais(db.Model):
     @staticmethod
     def get_by_id():
         return Pais.query.get(id)
+    
+    @staticmethod
+    def get_by_name(name):
+        return Pais.query.filter_by(nombre=name).first() 
 
     @staticmethod
     def get_all():
@@ -215,6 +222,10 @@ class Idioma(db.Model):
     @staticmethod
     def get_by_id():
         return Idioma.query.get(id)
+
+    @staticmethod
+    def get_by_name(name):
+        return Idioma.query.filter_by(nombre=name).first() 
 
     @staticmethod
     def get_all():

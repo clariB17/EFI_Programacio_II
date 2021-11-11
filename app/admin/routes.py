@@ -1,24 +1,28 @@
 from flask import app, render_template, redirect, url_for, abort, request, send_file
 from flask_login import login_required, current_user
+from pymysql import NULL
 from app.auth.decorators import admin_required
 from app.auth.models import User
-from app.models import Libro
+from app.models import Genero, Libro, Genero, Pais, Autor, Idioma
 from . import admin_bp
 from .forms import PostForm, UserAdminForm, Libros_upload, Autores_upload
 
 from werkzeug.utils import secure_filename
 import os
 
-from app import admin
 
 
-FOLDER = os.path.abspath('app/static/libros')
+FOLDER_LIBRO = os.path.abspath('app/static/libros')
+FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
 EXTENSIONS_LIB = set(['epub', 'pdf'])
-EXTENSIONS_IMG = set(['epub', 'pdf'])
+EXTENSIONS_IMG = set(['png', 'jpeg'])
 
 
-def allowed_file(filename):
+def libro_permitido(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS_LIB
+
+def imagen_permitida(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS_IMG
 
 @admin_bp.route("/admin/libro_upload/", methods=['GET', 'POST'])
 @login_required
@@ -27,16 +31,54 @@ def libro_upload():
     form = Libros_upload()
     if request.method == 'POST':
         if form.validate_on_submit():
-            if 'ourfile' not in request.files:
-                return 'the form has no file part.'
-            f = request.files['ourfile']
-            if f.filename == '':
-                return 'no file selected'
-            if f and allowed_file(f.filename):
-                filename = secure_filename(f.filename)
-                f.save(os.path.join(FOLDER, filename))
-                return redirect(url_for('admin.get_file', filename=filename))
-            return 'file not allowed'
+            name = form.titulo.data
+            isbn = form.ISBN.data
+            precio = form.precio.data
+            genero = form.genero.data
+            autor = form.autor.data
+            idioma = form.idioma.data
+
+            codigo = Libro.get_by_name(isbn)
+            if codigo is not None:
+                error = 'ERROR: El ISBN %s ya está siendo utilizado por otro usuario' %isbn
+                return render_template('admin/libro_upload.html', form=form, error=error)
+            
+            if genero == None or idioma == None or autor == None:
+                error = 'ERROR: Campo de seleccion incompleto'
+                return render_template('admin/libro_upload.html', form=form, error=error)
+            
+            if ('libro' not in request.files) and ('imagen' not in request.files):
+                error = 'ERROR: No se encontro el archivo esperado.'
+                return render_template('admin/libro_upload.html', form=form, error=error)
+
+            f = request.files['libro']
+            i = request.files['imagen']
+
+            if f.filename == '' and i.filename == '':
+                error = 'ERROR: Nombre de archivo en blanco'
+                return render_template('admin/libro_upload.html', form=form, error=error)
+
+            if (f and libro_permitido(f.filename)) and (i and imagen_permitida(i.filename)):
+                libro_name = secure_filename(f.filename)
+                f.save(os.path.join(FOLDER_LIBRO, libro_name))
+
+                imagen_name = secure_filename(i.filename)
+                i.save(os.path.join(FOLDER_IMAGEN_LIBRO, imagen_name))
+
+                libro = Libro()
+                libro.titulo = name
+                libro.ISBN = isbn
+                libro.precio = precio
+                libro.id_genero = Genero.get_by_name(genero.nombre).id
+                libro.id_autor =  Autor.get_by_name(autor.nombre).id
+                libro.id_idioma = Idioma.get_by_name(idioma.nombre).id
+                libro.ruta_foto = imagen_name 
+                libro.ruta_libro = libro_name
+                libro.save()
+
+                return redirect(url_for('admin.get_file', filename=libro_name))
+            error = 'ERROR: Extencion de archivo no permitida'
+            return render_template('admin/libro_upload.html', form=form, error=error)
     return render_template('admin/libro_upload.html', form=form)
 
 
@@ -52,7 +94,7 @@ def autor_upload():
 
 @admin_bp.route("/admin/uploads/<filename>")
 def get_file(filename):
-    file = os.path.join(FOLDER, filename)
+    file = os.path.join(FOLDER_LIBRO, filename)
     return send_file(file)
 
 

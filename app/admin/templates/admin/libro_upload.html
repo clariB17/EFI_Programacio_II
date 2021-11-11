@@ -6,6 +6,7 @@
 
 {% block content %}
     <form action="{{ url_for('admin.libro_upload') }}" method="POST" enctype="multipart/form-data">
+
         {{  form.hidden_tag() }}
         {{  form.titulo.label()  }}
         {{  form.titulo()  }} <br>
@@ -23,6 +24,8 @@
         {{  form.libro()  }} <br>
         {{  form.imagen.label()  }}
         {{  form.imagen()  }} <br>
+        <div class="text-danger">{{ error }}</div>
         {{  form.submit()  }} <br>
+        
     </form>
 {% endblock %}
