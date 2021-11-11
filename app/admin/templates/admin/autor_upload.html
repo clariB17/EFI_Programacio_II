@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block title %}
+    Miniblog | Admin
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('admin.autor_upload') }}" method="POST" enctype="multipart/form-data">
+        {{  form.hidden_tag() }}
+        {{  form.nombre.label()  }}
+        {{  form.nombre()  }} <br>
+        {{  form.apellido.label()  }}
+        {{  form.apellido()  }} <br>
+        {{  form.fecha_de_nacimiento.label()  }}
+        {{  form.fecha_de_nacimiento()  }} <br>
+        {{  form.imagen.label()  }}
+        {{  form.imagen()  }} <br>
+        {{  form.pais.label()  }}
+        {{  form.pais()  }} <br>
+        {{  form.submit()  }} <br>
+    </form>
+{% endblock %}

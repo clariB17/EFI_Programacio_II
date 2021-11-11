@@ -4,7 +4,7 @@ from app.auth.decorators import admin_required
 from app.auth.models import User
 from app.models import Libro
 from . import admin_bp
-from .forms import PostForm, UserAdminForm, Libros_upload
+from .forms import PostForm, UserAdminForm, Libros_upload, Autores_upload
 
 from werkzeug.utils import secure_filename
 import os
@@ -20,8 +20,10 @@ EXTENSIONS_IMG = set(['epub', 'pdf'])
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS_LIB
 
-@admin_bp.route("/admin/upload/", methods=['GET', 'POST'])
-def upload():
+@admin_bp.route("/admin/libro_upload/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def libro_upload():
     form = Libros_upload()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -35,8 +37,18 @@ def upload():
                 f.save(os.path.join(FOLDER, filename))
                 return redirect(url_for('admin.get_file', filename=filename))
             return 'file not allowed'
-    return render_template('admin/upload.html', form=form)
+    return render_template('admin/libro_upload.html', form=form)
 
+
+@admin_bp.route("/admin/autor_upload/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def autor_upload():
+    form = Autores_upload()
+    if request.method == 'POST':
+        pass
+    return render_template('/admin/autor_upload.html', form=form)
+    
 
 @admin_bp.route("/admin/uploads/<filename>")
 def get_file(filename):

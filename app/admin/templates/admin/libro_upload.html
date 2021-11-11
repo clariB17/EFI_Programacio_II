@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ url_for('admin.upload') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url_for('admin.libro_upload') }}" method="POST" enctype="multipart/form-data">
         {{  form.hidden_tag() }}
         {{  form.titulo.label()  }}
         {{  form.titulo()  }} <br>
