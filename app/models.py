@@ -132,9 +132,6 @@ class Autor(db.Model):
 
     id_pais = db.Column(db.Integer, db.ForeignKey('pais.id'), nullable=False)
 
-    def __init__(self, nombre, id_pais):
-        self.nombre = nombre
-        self.id_pais = id_pais
 
     def __repr__(self):
         return '<autor {self.nombre}'
@@ -194,7 +191,7 @@ class Pais(db.Model):
 
     @staticmethod
     def get_all():
-        return Puntuacion.query.all()
+        return Pais.query.all()
 
 class Idioma(db.Model):
     id = db.Column(db.Integer, primary_key = True)
