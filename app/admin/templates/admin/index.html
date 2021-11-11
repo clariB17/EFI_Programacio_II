@@ -6,15 +6,25 @@
 
 {% block content %}
     <div class="text-center font-monospace text-decoration-underline">
-        <h2>Hola {{ current_user.name}} </h2>
+        <h2> Admin: {{ current_user.name}} </h2>
 
     </div>
-    <div class="mx-auto col-9 text-center mt-5">
-        <a type="button" class=" btn button usu border border-dark rounded-pill border-5 col-4 m-3 p-2 mt-5" href="{{ url_for('admin.list_posts') }}">Agregar libros</a>
-        <a type="button" class=" btn button usu border border-dark rounded-pill border-5 col-4 m-3 p-2 mt-5" href="{{ url_for('admin.list_posts') }}">Agregar Autores</a>
-        <a type="button" class=" btn button usu border border-dark rounded-pill border-5 col-4 m-3 p-2 mt-5" href="{{ url_for('admin.list_posts') }}">Recomendaciones</a>
-        <a type="button" class="btn button border border-dark rounded-pill border-5 col-4 m-3 p-2 mt-5 usu" href="{{ url_for('admin.list_users') }}">Usuarios</a>
+    <div class="mx-auto text-center mt-5">
+        <div class="dropdown">
+            <a class="questo tuerca btn btn-secondary border-dark rounded-circle m-0 p-0 usu  animate__animated animate__rotateIn animate__delay-0.5s " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="  border-dark rounded-circle p-0 usu " src="{{url_for('static', filename='img/tuerca.svg')}}"  height="100" width="100">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right conteiner col-12 border-0" aria-labelledby="dropdownMenuLink">
+                <div class="mx-auto text-center mt-5 border-0">
+                    <div class="mt-0 d-inline-block" ><a type="button" class="dropdown-item btn button usu border border-dark rounded-pill border-2" href="{{ url_for('admin.libro_upload') }}">Agregar libros</a></div>
+                    <div class="mt-5 d-inline-block"><a type="button" class="dropdown-item btn button usu border border-dark rounded-pill border-2 " href="{{ url_for('admin.autor_upload') }}">Agregar Autores</a></div>
+                    <div class="mt-0 d-inline-block"><a type="button" class="dropdown-item btn button usu border border-dark rounded-pill border-2 " href="{{ url_for('admin.list_users') }}">Usuarios</a></div>
+                </div>
+            </div>    
+        </div>
     </div>
+    
+      
     
 {% endblock %}
 

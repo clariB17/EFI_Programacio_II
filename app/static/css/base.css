@@ -19,8 +19,6 @@
 .usu:hover{
     background-color: cadetblue;
     border: solid black 0.1ch;
-    padding: 0.1cm ;
-    margin: 0.1cm;
 }
 
 .largo{
@@ -56,4 +54,9 @@
 
 .adm:hover{
     background-color: cadetblue;
+}
+
+.questo:hover {
+    -webkit-animation: shake 1s;
+    animation: shake 1s;
 }

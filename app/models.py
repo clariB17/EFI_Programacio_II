@@ -194,7 +194,7 @@ class Pais(db.Model):
 
     @staticmethod
     def get_all():
-        return Puntuacion.query.all()
+        return Pais.query.all()
 
 class Idioma(db.Model):
     id = db.Column(db.Integer, primary_key = True)

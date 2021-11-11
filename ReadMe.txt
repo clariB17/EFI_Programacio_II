@@ -94,3 +94,12 @@ index admin (idea suplente)
 {% endblock %}
 
 <!-- recomendaciones libros autores -->
+ 
+
+preguntas 
+
+
+1- El submit del form de libro-update no larga error cuadno no se sube el libro como hacer para que de un aviso de exito o de error.
+2- Sigo sin poder hacer funcionar el Backgraund en algunas paginas 
+3- Como mostrar un listado de todos los libros
+4- No puedo subir un archivo epub
