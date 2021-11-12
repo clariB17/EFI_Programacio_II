@@ -4,4 +4,4 @@ from app.models import Libro
 
 @public_bp.route("/")
 def index():
-    return render_template("public/index.html")
+    return render_template("public/index.html", )

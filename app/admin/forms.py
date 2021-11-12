@@ -2,6 +2,7 @@
 from flask_wtf import FlaskForm
 # HEREDAMOS 4 COMPONENTES, CAJA DE TEXTO, BOTON SUBMIT, CAMPO PARA CLAVE y AREA DE TEXTO
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField, DecimalField, FileField
+from wtforms import validators
 # HEREDAMOS VALIDADORES, DATO REQUERIDO, Username Y LARGO DE UN CAMPO
 from wtforms.validators import DataRequired, Length
 from wtforms.fields.html5 import DateField
@@ -24,7 +25,7 @@ class Libros_upload(FlaskForm):
 class Autores_upload(FlaskForm):
     nombre = StringField(label='Nombre', validators=[DataRequired(), Length(max=128)])
     apellido = StringField(label='Apellido', validators=[DataRequired(), Length(max=128)])
-    fecha_de_nacimiento = StringField(DateField(label='fecha de nacimiento', format = '%Y/%m/%d')) 
+    fecha_de_nacimiento = DateField(label='fecha de nacimiento', format = '%Y-%m-%d', validators=(validators.DataRequired(),))
     imagen = FileField(label='Adjuntar imagen', validators=[DataRequired()])
     pais = QuerySelectField(label='Pais', query_factory=Pais.get_all, get_label='nombre', allow_blank=True, validators=[DataRequired()])
     submit = SubmitField(label='Guardar')

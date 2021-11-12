@@ -14,7 +14,7 @@ FOLDER_LIBRO = os.path.abspath('app/static/libros')
 FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
 FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
 EXTENSIONS_LIB = set(['epub', 'pdf'])
-EXTENSIONS_IMG = set(['png', 'jpeg'])
+EXTENSIONS_IMG = set(['png', 'jpeg', 'jpg'])
 
 
 def libro_permitido(filename):
@@ -129,12 +129,12 @@ def autor_upload():
     return render_template('/admin/autor_upload.html', form=form)
     
 # para pruebas
-@admin_bp.route("/admin/uploads/<filename>")
+@admin_bp.route("/admin/uploads_autor/<filename>")
 def get_autor(filename):
     file = os.path.join(FOLDER_IMAGEN_AUTOR, filename)
     return send_file(file)
 
-@admin_bp.route("/admin/uploads/<filename>")
+@admin_bp.route("/admin/uploads_libro/<filename>")
 def get_libro(filename):
     file = os.path.join(FOLDER_LIBRO, filename)
     return send_file(file)
