@@ -29,7 +29,8 @@
             {{  form.imagen.label(class="col-2")  }}
             {{  form.imagen(class="col ms-0 ps-0")  }} <br>
         </div>
-
+        <span class="text-danger">{{ error }}</span>
         {{  form.submit(class="btn btn-outline-success text-center")  }} <br>
+        
     </form>
 {% endblock %}

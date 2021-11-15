@@ -10,59 +10,47 @@
         Novedades 
     </h1>
 
-    <div class="row row-cols-1 row-cols-md-3 g-5 m-5 p-2">
-        <div class="col">
-          <div class="card">
-                <img src="{{url_for('static', filename='img/light.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body bg-secondary">
-                    <h5 class="card-title">Libro title</h5>
-                    <p class="card-text">Autor sinopsis del libro</p>
-                    <button type="button" class="btn btn-success m-1">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
-                    <div class="rating">
-                        <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star3" title="Very good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star2" title="Good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star1" title="Bad" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+    <div class="row row-cols-1 row-cols-md-3 mx-auto">
+        {% for libro in libros %}
+            <div class="col mx-auto">
+                <!-- creo que hay que no se esta guardando bien la ruta de la imagen de la tapa del libro 
+                    como hacer para que la imagen no se deforme pero que no quede fuera del tamaño adecuado para la card -->
+                <div class="card">{{ libro.ruta_foto }}  
+                    <img src= "{{ url_for('static', filename=' {{ libro.ruta_foto }} ') }}" class="card-img-top" height="280" alt="">
+                    <div class="card-body bg-secondary">
+                        <h5 class="card-title"> {{ libro.titulo }}</h5>
+                        <p class="card-text">({{ libro.id_autor }})</p>
+                        <button type="button" class="btn btn-success ">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
+                        <div class="rating">
+                            <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star3" title="Very good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star2" title="Good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star1" title="Bad" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="{{url_for('static', filename='img/light.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body bg-secondary">
-                    <h5 class="card-title">Libro title</h5>
-                    <p class="card-text">Autor sinopsis del libro</p>
-                    <button type="button" class="btn btn-success m-1">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
-                    <div class="rating">
-                          <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                          <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                          <label class="star" for="star3" title="Very good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                          <label class="star" for="star2" title="Good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                          <label class="star" for="star1" title="Bad" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+        {% else %}
+        <div class="row row-cols-1 row-cols-md-3">
+            <div class="col">
+              <div class="card">
+                    <img src="{{url_for('static', filename='img/light.jpg')}}" class="card-img-top" alt="...">
+                    <div class="card-body bg-secondary">
+                        <h5 class="card-title">Libro title</h5>
+                        <p class="card-text">Autor sinopsis del libro</p>
+                        <button type="button" class="btn btn-success m-1">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
+                        <div class="rating">
+                            <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star3" title="Very good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star2" title="Good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star1" title="Bad" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="{{url_for('static', filename='img/light.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body bg-secondary">
-                    <h5 class="card-title">Libro title</h5>
-                    <p class="card-text">Autor sinopsis del libro</p>
-                    <button type="button" class="btn btn-success m-1">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
-                    <div class="rating">
-                        <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star3" title="Very good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star2" title="Good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                        <label class="star" for="star1" title="Bad" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        {% endfor %}
     <br><br>
 </div>
 {% endblock %}
