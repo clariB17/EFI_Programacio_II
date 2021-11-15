@@ -6,15 +6,6 @@ from app.models import Genero, Libro, Genero, Pais, Autor, Idioma
 from . import admin_bp
 from .forms import Libros_upload, Autores_upload
 from werkzeug.utils import secure_filename
-<<<<<<< HEAD
-from extension_file import libro_permitido, imagen_permitida
-import os
-
-FOLDER_LIBRO = os.path.abspath('app/static/libros')
-FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
-FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
-
-=======
 from extension_file import imagen_permitida, libro_permitido
 import os
 
@@ -22,7 +13,6 @@ import os
 FOLDER_LIBRO = os.path.abspath('app/static/libros')
 FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
 FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
->>>>>>> b1f31ff0ea1df9b933757b4cd221104148494228
 
 @admin_bp.route("/admin/libro_upload/", methods=['GET', 'POST'])
 @login_required
