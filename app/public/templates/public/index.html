@@ -15,11 +15,11 @@
             <div class="col mx-auto">
                 <!-- creo que hay que no se esta guardando bien la ruta de la imagen de la tapa del libro 
                     como hacer para que la imagen no se deforme pero que no quede fuera del tamaño adecuado para la card -->
-                <div class="card">{{ libro.ruta_foto }}  
-                    <img src= "{{ url_for('static', filename=' {{ libro.ruta_foto }} ') }}" class="card-img-top" height="280" alt="">
+                <div class="card">
+                    <img src= "{{ url_for('static', filename='img_libro/')}}{{ libro.ruta_foto }}" class="card-img-top" height="280" alt="">
                     <div class="card-body bg-secondary">
                         <h5 class="card-title"> {{ libro.titulo }}</h5>
-                        <p class="card-text">({{ libro.id_autor }})</p>
+                        <p class="card-text">{{ autores.get_by_id(libro.id_autor).nombre }} {{ autores.get_by_id(libro.id_autor).apellido }}</p>
                         <button type="button" class="btn btn-success ">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
                         <div class="rating">
                             <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>

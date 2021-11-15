@@ -146,7 +146,7 @@ class Autor(db.Model):
         db.session.commit()
     
     @staticmethod
-    def get_by_id():
+    def get_by_id(id):
         return Autor.query.get(id)
     
     @staticmethod
