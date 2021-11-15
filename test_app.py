@@ -1,9 +1,14 @@
-from app.admin import routes
-from app.auth import routes
+from app.admin.routes import libro_permitido, imagen_permitida
 
-def inc(x):
-    return x + 1
+def test_img_true():
+    assert imagen_permitida('pepe.jpg') == True
 
+def test_img_false():
+    assert imagen_permitida('pepe.gif') == False
 
-def test_answer():
-    assert inc(3) == 4
+def test_lib_true():
+    assert libro_permitido('pepe.pdf') == True
+
+def test_lib_false():
+    assert libro_permitido('pepe.docx') == False
+    
