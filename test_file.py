@@ -1,5 +1,10 @@
+<<<<<<< HEAD:test_app.py
 from app.admin.extension_file import libro_permitido, imagen_permitida
 
+=======
+from extension_file import libro_permitido, imagen_permitida
+# __init__.py
+>>>>>>> b1f31ff0ea1df9b933757b4cd221104148494228:test_file.py
 def test_img_true():
     assert imagen_permitida('pepe.jpg') == True
 
