@@ -14,7 +14,7 @@ FOLDER_LIBRO = os.path.abspath('app/static/libros')
 FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
 FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
 EXTENSIONS_LIB = set(['epub', 'pdf'])
-EXTENSIONS_IMG = set(['png', 'jpeg'])
+EXTENSIONS_IMG = set(['png', 'jpeg', 'jpg'])
 
 
 def libro_permitido(filename):

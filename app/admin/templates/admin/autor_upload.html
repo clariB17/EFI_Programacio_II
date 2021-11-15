@@ -5,22 +5,6 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
-    <form action="{{ url_for('admin.autor_upload') }}" method="POST" enctype="multipart/form-data">
-        {{  form.hidden_tag() }}
-        {{  form.nombre.label()  }}
-        {{  form.nombre()  }} <br>
-        {{  form.apellido.label()  }}
-        {{  form.apellido()  }} <br>
-        {{  form.fecha_de_nacimiento.label()  }}
-        {{  form.fecha_de_nacimiento()  }} <br>
-        {{  form.imagen.label()  }}
-        {{  form.imagen()  }} <br>
-        {{  form.pais.label()  }}
-        {{  form.pais()  }} <br>
-        <div class="text-danger">{{ error }}</div>
-        {{  form.submit()  }} <br>
-=======
 <h5 class="text-center mb-0 font-monospace">Agregar Autor nuevo</h5>
 
     <form class="m-3 p-3 border  rounded border-dark border-3 col-8 mx-auto text-center" action="{{ url_for('admin.autor_upload') }}" method="POST" enctype="multipart/form-data">
@@ -47,6 +31,5 @@
         </div>
 
         {{  form.submit(class="btn btn-outline-success text-center")  }} <br>
->>>>>>> 31b7284f9152b830672aad1c9697a6c2ae9b719a
     </form>
 {% endblock %}
