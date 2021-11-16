@@ -56,7 +56,7 @@ class Libro(db.Model):
     def get_last():
         if len(Libro.get_all()) >= 3:
             obj = Libro.query.all()
-            return obj[-1] , obj[-2], obj[-3]
+            return obj[-3] , obj[-2], obj[-1]
         return Libro.get_all()
 
 
