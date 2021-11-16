@@ -71,11 +71,13 @@
                     <a type="button" class="dropdown-item border border-top-0" href="#">Usuarios</a>
                 </li>
                 <li>
-                {% endif %}
-                                <!-- Avatar -->
+                    <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+                </li>
+            </ul>
+                {% else %}
+                <!-- Avatar -->
                 <a href="{{ url_for('admin.index') }}" class="link-dark"><img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-circle"  height="35" alt="" loading="lazy"/></a>
-                    <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark " id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                </a>
+                <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark " id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                 <ul class="gris dropdown-menu dropdown-menu-end " aria-labelledby="menuderecha">
                     <li>
                         <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.libro_upload') }}">M Biblioteca</a>        
@@ -86,16 +88,15 @@
                     <li>
                         <a type="button" class="dropdown-item border border-top-0" href="#">Preferencias</a>
                     </li>
-                            <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
-            {% endif %}                
-                </li>
-            </ul>
-        </div>
+                    <li>
+                        <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+                    </li>
+                </ul>
 
+                {% endif %}
+            {% endif %}  
         </div>
-        <!-- Container wrapper -->
     </nav>
-  <!-- Navbar -->
 <!-- BLOQUE DE CONTENIDO -->
     {% block content %}{% endblock %}
     
