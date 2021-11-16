@@ -4,15 +4,15 @@
 {% block title %}HOME CANTARO DE PIEDRA{% endblock %}
 <!-- CARGAMOS CONTENIDO EN EL BLOQUE DE CONTENIDOS -->
 {% block content %}
-<div class="text-center">
+<div class="text-center mt-5">
     
     <h1>
         Novedades 
     </h1>
 
-    <div class="row row-cols-1 row-cols-md-3 mx-auto">
+    <div class="row row-cols-1 row-cols-md-3 mx-auto container">
         {% for libro in libros %}
-            <div class="col mx-auto">
+            <div class="col mx-auto g-5">
                 <!-- creo que hay que no se esta guardando bien la ruta de la imagen de la tapa del libro 
                     como hacer para que la imagen no se deforme pero que no quede fuera del tamaño adecuado para la card -->
                 <div class="card">
@@ -51,6 +51,7 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
     <br><br>
 </div>
 {% endblock %}
