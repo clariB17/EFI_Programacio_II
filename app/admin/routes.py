@@ -1,27 +1,18 @@
-from flask import render_template, redirect, url_for, abort, request, send_file
-from flask_login import login_required, current_user
+from flask import render_template, redirect, url_for, request, send_file
+from flask_login import login_required
 from app.auth.decorators import admin_required
 from app.auth.models import User
 from app.models import Genero, Libro, Genero, Pais, Autor, Idioma
 from . import admin_bp
-from .forms import PostForm, UserAdminForm, Libros_upload, Autores_upload
+from .forms import Libros_upload, Autores_upload
 from werkzeug.utils import secure_filename
+from extension_file import imagen_permitida, libro_permitido
 import os
-
 
 
 FOLDER_LIBRO = os.path.abspath('app/static/libros')
 FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
 FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
-EXTENSIONS_LIB = set(['epub', 'pdf'])
-EXTENSIONS_IMG = set(['png', 'jpeg', 'jpg'])
-
-
-def libro_permitido(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS_LIB
-
-def imagen_permitida(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1] in EXTENSIONS_IMG
 
 @admin_bp.route("/admin/libro_upload/", methods=['GET', 'POST'])
 @login_required

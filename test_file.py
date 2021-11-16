@@ -1,4 +1,5 @@
-from app.admin.routes import libro_permitido, imagen_permitida
+from extension_file import libro_permitido, imagen_permitida
+
 
 def test_img_true():
     assert imagen_permitida('pepe.jpg') == True
