@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FRAMEWORK BOOTSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <!-- animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- LLAMAMOS UNA HOJA DE ESTILOS ESTÁTICA -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
+    <!-- BLOQUE DE TITULO -->
+    <title>{% block title %}Cántaro de piedra{% endblock %}</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/book-reader-solid.svg')}}">
+</head>
+<body class="fondo">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light amarillo">
+        <!-- Container wrapper -->
+        <div class="container-fluid me-lg-5 ms-lg-5">
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuizquiera" aria-controls="menuizquiera" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="menuizquiera">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{{ url_for('public.index') }}">
+                <img src="{{url_for('static', filename='img/books_icon.ico')}}"class="rounded-3" height="45" alt="" loading="lazy"/>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"  aria-label="Toggle navigation">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Libros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contactos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca de nosotros</a>
+                </li>
+            </ul>
+                <!-- Left links -->
+        </div>
+        
+        <!-- Collapsible wrapper -->
+    
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            {% if current_user.is_anonymous %}
+            <a a type="button" class="btn btn-outline-success m-1" href="{{ url_for('auth.login') }}">Login</a>
+            <a type="button" class="btn btn-outline-primary m-1" href="{{ url_for('auth.show_signup_form') }}">Registrar</a>
+                {% else %}
+            <h5 class="m-1 d-none d-sm-block">{{ current_user.name}}</h5>
+                {% if current_user.is_admin %}
+            <!-- Avatar -->
+            <a href="{{ url_for('admin.index') }}"><img src="{{url_for('static', filename='img/tuerca.svg')}}" class="rounded-circle hb"  height="30" alt="" loading="lazy"/></a>
+                <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark" id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            </a>
+            <ul class="gris dropdown-menu dropdown-menu-end " aria-labelledby="menuderecha">
+                <li>
+                    <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.libro_upload') }}">Agregar libros</a>        
+                </li>
+                <li>
+                    <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.autor_upload') }}">Agregar Autores</a>        
+                </li>
+                <li>
+                    <a type="button" class="dropdown-item border border-top-0" href="#">Usuarios</a>
+                </li>
+                <li>
+                    <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+                </li>
+            </ul>
+                {% else %}
+                <!-- Avatar -->
+                <a href="{{ url_for('admin.index') }}" class="link-dark"><img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-circle"  height="35" alt="" loading="lazy"/></a>
+                <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark " id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                <ul class="gris dropdown-menu dropdown-menu-end " aria-labelledby="menuderecha">
+                    <li>
+                        <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.libro_upload') }}">M Biblioteca</a>        
+                    </li>
+                    <li>
+                        <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.autor_upload') }}">Mis Favoritos</a>        
+                    </li>
+                    <li>
+                        <a type="button" class="dropdown-item border border-top-0" href="#">Preferencias</a>
+                    </li>
+                    <li>
+                        <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+                    </li>
+                </ul>
+
+                {% endif %}
+            {% endif %}  
+        </div>
+    </nav>
+<!-- BLOQUE DE CONTENIDO -->
+    {% block content %}{% endblock %}
+    
+    <footer class="bg-dark text-center text-white sticky-sm-bottom fixed-bottom">
+        <!-- Grid container -->
+        <div class="container p-1 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-1">
+            <!-- Facebook -->
+            <a class="btn btn-outline-danger btn-floating m-1" href="#!" role="button"
+              ><i class="bi bi-instagram"></i></a>
+            <!-- Instagram -->
+            <a class="btn btn-outline-primary btn-floating m-1" href="#!" role="button"
+              ><i class="bi bi-facebook"></i></a>
+          </section>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2021 Copyright:
+          <a class="text-white" href="https://google.com/">cantarodepiedra.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+<!-- BOOTSTAP -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script></body>
+</body>
+</html>

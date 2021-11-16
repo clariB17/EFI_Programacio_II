@@ -1,9 +1,8 @@
-from flask import (render_template, redirect, url_for, request, current_app)
+from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from app import login_manager
-from app.common.mail import send_email
 from . import auth_bp
 from .forms import SignupForm, LoginForm
 from .models import User
@@ -17,23 +16,17 @@ def show_signup_form():
     error = None
     if form.validate_on_submit():
         name = form.name.data
-        email = form.email.data
+        username = form.username.data
         password = form.password.data
-        # Comprobamos que no hay ya un usuario con ese email
-        user = User.get_by_email(email)
+        # Comprobamos que no hay ya un usuario con ese username
+        user = User.get_by_username(username)
         if user is not None:
-            error = f'El email {email} ya está siendo utilizado por otro usuario'
+            error = f'El username {username} ya está siendo utilizado por otro usuario'
         else:
             # Creamos el usuario y lo guardamos
-            user = User(name=name, email=email)
+            user = User(name=name, username=username)
             user.set_password(password)
             user.save()
-            # Enviamos un email de bienvenida
-            send_email(subject='Bienvenid@ al miniblog',
-                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
-                       recipients=[email, ],
-                       text_body=f'Hola {name}, bienvenid@ al miniblog de Flask',
-                       html_body=f'<p>Hola <strong>{name}</strong>, bienvenid@ al miniblog de Flask</p>')
             # Dejamos al usuario logueado
             login_user(user, remember=True)
             next_page = request.args.get('next', None)
@@ -43,6 +36,7 @@ def show_signup_form():
     return render_template("auth/signup_form.html", form=form, error=error)
 
 
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     # PRIMERO COMPROBAMOS SI EL USUARIO ESTÁ AUTENTICADO
@@ -50,8 +44,8 @@ def login():
         return redirect(url_for('public.index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.get_by_email(form.email.data)
-        # SI EXISTE UN USUARIO CON ESE EMAIL Y LA CLAVE ES CORRECTA, 
+        user = User.get_by_username(form.username.data)
+        # SI EXISTE UN USUARIO CON ESE username Y LA CLAVE ES CORRECTA, 
         # AUTENTICAMOS EL USUARIO USANDO EL METODO login_user
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)

@@ -1,0 +1,82 @@
+.fondo {
+    background: url(../img/grey-370125_960_720.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.foto {
+    background-image: no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
+.user-info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.usu {
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    
+}
+
+.usu:hover{
+    background-color: cadetblue;
+    border: solid black 0.1ch;
+}
+
+.largo{
+    height: 100px
+}
+.ddm{
+    background: none;
+}
+
+.hb:hover{
+    background-color: grey;
+    padding: 3px;
+}
+.gris{
+    background-color: rgb(199, 194, 194);
+}
+.dropfondo{
+    background-color: gray;    
+}
+.si:hover{
+    background-color: rgb(247, 10, 10);
+}
+.sii:hover{
+    background-color: rgb(10, 247, 42);
+}
+.siii:hover{
+    background-color: rgb(10, 34, 247);
+}
+
+.stars:hover{
+    color: #d8d842;
+    
+}
+
+.adm {
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    
+}
+
+.adm:hover{
+    background-color: cadetblue;
+}
+
+.questo:hover {
+    -webkit-animation: shake 1s;
+    animation: shake 1s;
+}
+
+.amarillo {
+    background-color: goldenrod;
+
+}

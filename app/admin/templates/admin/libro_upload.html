@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+{% block title %}
+    Agregar Libro | Admin
+{% endblock %}
+
+{% block content %}
+<h5 class="text-center mb-0 font-monospace">Agregar libro nuevo</h5>
+<div class="m-3 border-dark border-1 mx-auto text-center">
+    <form  class="border rounded border-dark border-3 p-3 m-3 col-8 mx-auto text-center" action="{{ url_for('admin.libro_upload') }}" method="POST" enctype="multipart/form-data">
+        {{  form.hidden_tag() }}
+        <div class="p-2 row ">
+            {{  form.titulo.label( class="col-1")  }}
+            {{  form.titulo(class="col")  }} <br>
+        </div>
+        <div class="p-2 row">
+            {{  form.ISBN.label(class="col-1")  }}
+            {{  form.ISBN(class="col")  }} <br>
+        </div>
+        <div class="p-2 row">
+            {{  form.genero.label(class="col-1")  }}
+            {{  form.genero(class="col")  }} <br>
+        </div>
+        <div class="p-2 row">
+            {{  form.autor.label(class="col-1")  }}
+            {{  form.autor(class="col")  }} <br>
+        </div>
+        <div class="p-2 row">
+            {{  form.idioma.label(class="col-1")  }}
+            {{  form.idioma(class="col")  }} <br>
+        </div>
+        <div class="p-2 row">
+            {{  form.precio.label(class="col-1")  }}
+            {{  form.precio(class="col")  }} <br>
+        </div>
+        <div class="p-2 row">
+            {{  form.imagen.label(class="col-2 ")  }}
+            {{  form.imagen(class="col ")  }} <br>
+        </div>
+        <div class="p-2 ps-0 es-0 row">
+            {{  form.libro.label(class="col-2 ms-0")  }}
+            {{  form.libro(class="col")  }} <br>
+        <span class="text-danger">{{ error }}</span>
+        </div>
+        {{  form.submit(class="btn btn-outline-success text-center")  }} <br>
+    </form>
+</div>
+{% endblock %}
