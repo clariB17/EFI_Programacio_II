@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="">
     <div class="text-center font-monospace text-decoration-underline">
         <h2> Admin: {{ current_user.name}} </h2>
 
@@ -14,17 +15,16 @@
             <a class="questo tuerca btn btn-secondary border-dark rounded-circle m-0 p-0 usu  animate__animated animate__rotateIn animate__delay-0.5s " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="  border-dark rounded-circle p-0 usu " src="{{url_for('static', filename='img/tuerca.svg')}}"  height="100" width="100">
             </a>
-            <div class="dropdown-menu dropdown-menu-right conteiner col-12 border-0" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-menu dropdown-menu-right col-12 border-0 ddm" aria-labelledby="dropdownMenuLink">
                 <div class="mx-auto text-center mt-5 border-0">
-                    <div class="mt-0 d-inline-block" ><a type="button" class="dropdown-item btn button usu border border-dark rounded-pill border-2" href="{{ url_for('admin.libro_upload') }}">Agregar libros</a></div>
-                    <div class="mt-5 d-inline-block"><a type="button" class="dropdown-item btn button usu border border-dark rounded-pill border-2 " href="{{ url_for('admin.autor_upload') }}">Agregar Autores</a></div>
-                    <div class="mt-0 d-inline-block"><a type="button" class="dropdown-item btn button usu border border-dark rounded-pill border-2 " href="#">Usuarios</a></div>
+                    <div class="mt-0 d-inline-block" ><a type="button" class="animate__animated animate__backInLeft animate__delay-0.1s dropdown-item btn button usu border border-dark rounded-pill border-2" href="{{ url_for('admin.libro_upload') }}">Agregar libros</a></div>
+                    <div class="mt-5 d-inline-block"><a type="button" class="animate__animated animate__backInUp animate__delay-0.3s dropdown-item btn button usu border border-dark rounded-pill border-2 " href="{{ url_for('admin.autor_upload') }}">Agregar Autores</a></div>
+                    <div class="mt-0 d-inline-block"><a type="button" class="animate__animated animate__backInRight animate__delay-0.5s dropdown-item btn button usu border border-dark rounded-pill border-2 " href="#">Usuarios</a></div>
                 </div>
             </div>    
         </div>
     </div>
-    
-      
+</div>     
     
 {% endblock %}
 

@@ -3,28 +3,39 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <div>
-                {{ form.username.label }}
-                {{ form.username }}<br>
-                {% for error in form.username.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
+<div class="conteiner m-5 border border-2 border-dark row rounded">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col ms-0 ps-0 ddm">
+            <img src="{{url_for('static', filename='img/light.jpg')}}" alt="" class="img-fluid">
+        </div>
+        <div class="col conteiner p-5">
+            <div class="conteiren align-items-center text-center">
+                <img src="{{url_for('static', filename='img/book-reader-solid.svg')}}" alt="" height="80">
+                <h6>                Iniciar sesión                </h6>
             </div>
-            <div>
-                {{ form.password.label }}
-                {{ form.password }}<br>
-                {% for error in form.password.errors %}
-                <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div>{{ form.remember_me() }} {{ form.remember_me.label }}</div>
-            <div>
-                {{ form.submit() }}
-            </div>
-        </form>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.username.label (class="m-2")}}
+                    {{ form.username (class="ddm border-2 col-8  border-warning border-top-0 border-end-0 border-start-0")}}<br>
+                    {% for error in form.username.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.password.label (class="m-2") }}
+                    {{ form.password (class="ddm border-2  col-8 border-warning border-top-0 border-end-0 border-start-0") }}<br>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row justify-content-between mt-3">
+                    <div class="col-4">{{ form.remember_me(class="m-2") }} {{ form.remember_me.label (class="m-2") }}</div>
+                    <div class="col-4">{{ form.submit(class="btn btn-outline-success") }}</div>
+                </div>
+            </form>
+            <div class="mt-5 ms-3">¿No tienes cuenta? <a class="text-decoration-none link-dark" href="{{ url_for('auth.show_signup_form') }}">Regístrate</a></div>
+        </div>
     </div>
-    <div>¿No tienes cuenta? <a href="{{ url_for('auth.show_signup_form') }}">Regístrate</a></div>
+</div>
 {% endblock %}
