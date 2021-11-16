@@ -16,7 +16,7 @@
                 <!-- creo que hay que no se esta guardando bien la ruta de la imagen de la tapa del libro 
                     como hacer para que la imagen no se deforme pero que no quede fuera del tamaño adecuado para la card -->
                 <div class="card">
-                    <img src= "{{ url_for('static', filename='img_libro/')}}{{ libro.ruta_foto }}" class="card-img-top" height="280" alt="">
+                    <img src= "{{ url_for('static', filename='img_libro/')}}{{ libro.ruta_foto }}" class="card-img-top"  height="280" alt="">
                     <div class="card-body bg-secondary">
                         <h5 class="card-title"> {{ libro.titulo }}</h5>
                         <p class="card-text">{{ autores.get_by_id(libro.id_autor).nombre }} {{ autores.get_by_id(libro.id_autor).apellido }}</p>
