@@ -51,6 +51,13 @@ class Libro(db.Model):
     @staticmethod
     def get_all():
         return Libro.query.all()
+    
+    @staticmethod
+    def get_last():
+        if len(Libro.get_all()) >= 3:
+            obj = Libro.query.all()
+            return obj[-3] , obj[-2], obj[-1]
+        return Libro.get_all()
 
 
 # sobre el libro
