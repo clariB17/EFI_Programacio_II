@@ -264,6 +264,10 @@ class Deseados(db.Model):
     @staticmethod
     def get_by_id_user(id_user):
         return Deseados.query.filter_by(id_user=id_user).all()
+    
+    @staticmethod
+    def get_liked(id_user, id_libro):
+        return Deseados.query.filter_by(id_user=id_user, id_libro=id_libro).first()
 
 class Factura(db.Model):
     id = db.Column(db.Integer, primary_key = True)

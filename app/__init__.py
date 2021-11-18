@@ -5,6 +5,11 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 # IMPORTAMOS EL MANEJADOR DE MYSQL
 from pymysql import *
+import os
+
+FOLDER_LIBRO = os.path.abspath('app/static/libros')
+FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
+FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
 
 login_manager = LoginManager()
 # CREAMOS EL OBJETO SQLALCHEMY

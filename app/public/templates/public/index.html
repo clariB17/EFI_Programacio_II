@@ -20,7 +20,8 @@
                     <div class="card-body bg-secondary">
                         <h5 class="card-title"> {{ libro.titulo }}</h5>
                         <p class="card-text">{{ autores.get_by_id(libro.id_autor).nombre }} {{ autores.get_by_id(libro.id_autor).apellido }}</p>
-                        <button type="button" class="btn btn-success ">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
+                            <a type="button" class="btn btn-success ">comprar</a>
+                            <a type="button" href="{{ url_for('public.like', id_libro=libro.id) }}" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></a>
                         <div class="rating">
                             <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
                             <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
