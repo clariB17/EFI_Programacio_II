@@ -31,7 +31,7 @@ def like(id_libro):
 def all_libros():
     libros = Libro.get_all()
     autores = Autor
-    return render_template("public/index.html", libros=libros, autores=autores)
+    return render_template("public/libros.html", libros=libros, autores=autores)
 
 # para leer libros
 @public_bp.route("/leer/<id_libro>")

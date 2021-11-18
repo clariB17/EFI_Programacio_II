@@ -28,13 +28,13 @@
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="menuizquiera">
             <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="{{ url_for('public.index') }}">
+            <a class="navbar-brand mt-2 mt-lg-0 p-0 usu" href="{{ url_for('public.index') }}">
                 <img src="{{url_for('static', filename='img/books_icon.ico')}}"class="rounded-3" height="45" alt="" loading="lazy"/>
             </a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"  aria-label="Toggle navigation">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Libros</a>
+                    <a class="nav-link" href="{{ url_for('public.all_libros') }}">Libros</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contactos</a>
@@ -71,11 +71,13 @@
                     <a type="button" class="dropdown-item border border-top-0" href="#">Usuarios</a>
                 </li>
                 <li>
-                {% endif %}
-                                <!-- Avatar -->
+                    <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+                </li>
+            </ul>
+                {% else %}
+                <!-- Avatar -->
                 <a href="{{ url_for('admin.index') }}" class="link-dark"><img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-circle"  height="35" alt="" loading="lazy"/></a>
-                    <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark " id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                </a>
+                <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark " id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                 <ul class="gris dropdown-menu dropdown-menu-end " aria-labelledby="menuderecha">
                     <li>
                         <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.libro_upload') }}">M Biblioteca</a>        
@@ -86,20 +88,20 @@
                     <li>
                         <a type="button" class="dropdown-item border border-top-0" href="#">Preferencias</a>
                     </li>
-                            <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
-            {% endif %}                
-                </li>
-            </ul>
-        </div>
+                    <li>
+                        <a type="button" class="btn btn-outline-danger ms-2 m-1" href="{{ url_for('auth.logout') }}"><h6 class="d-none d-sm-block">Logout</h6><i class="d-block d-sm-none bi bi bi-power"></i></a>
+                    </li>
+                </ul>
 
+                {% endif %}
+            {% endif %}  
         </div>
-        <!-- Container wrapper -->
     </nav>
-  <!-- Navbar -->
 <!-- BLOQUE DE CONTENIDO -->
-    {% block content %}{% endblock %}
-    
-    <footer class="bg-dark text-center text-white sticky-sm-bottom fixed-bottom">
+    <div class="contenido">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="bg-dark text-center text-white sticky-sm-bottom ">
         <!-- Grid container -->
         <div class="container p-1 pb-0">
           <!-- Section: Social media -->
@@ -113,7 +115,7 @@
           </section>
         </div>
         <!-- Copyright -->
-        <div class="text-center" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center bg-" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2021 Copyright:
           <a class="text-white" href="https://google.com/">cantarodepiedra.com</a>
         </div>
