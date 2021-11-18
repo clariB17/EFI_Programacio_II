@@ -5,7 +5,7 @@
 <!-- CARGAMOS CONTENIDO EN EL BLOQUE DE CONTENIDOS -->
 {% block content %}
 <div class="text-center mt-5">
-    
+      
     <h1>
         Novedades 
     </h1>
@@ -21,7 +21,7 @@
                         <h5 class="card-title"> {{ libro.titulo }}</h5>
                         <p class="card-text">{{ autores.get_by_id(libro.id_autor).nombre }} {{ autores.get_by_id(libro.id_autor).apellido }}</p>
                             <a type="button" class="btn btn-success ">comprar</a>
-                            <a type="button" href="{{ url_for('public.like', id_libro=libro.id) }}" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></a>
+                            <a type="button" href="{{ url_for('public.like', id_libro=libro.id, page='index' ) }}" class="btn btn-outline-danger {% for like in likes  %}{% if like.id_libro == libro.id %}active{% endif %}{% endfor %} m-1"><i class="bi bi-suit-heart-fill"></i></a>
                         <div class="rating">
                             <label class="star" for="star5" title="Malo" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
                             <label class="star" for="star4" title="Regular" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
