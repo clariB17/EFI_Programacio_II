@@ -13,7 +13,7 @@ def index():
 def all_libros():
     libros = Libro.get_all()
     autores = Autor
-    return render_template("public/index.html", libros=libros, autores=autores)
+    return render_template("public/libros.html", libros=libros, autores=autores)
 
 #tenemos que charlar la compra
 @public_bp.route("/comprar/<id_libro>")

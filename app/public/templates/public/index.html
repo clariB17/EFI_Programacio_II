@@ -13,20 +13,18 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto container">
         {% for libro in libros %}
             <div class="col mx-auto g-5">
-                <!-- creo que hay que no se esta guardando bien la ruta de la imagen de la tapa del libro 
-                    como hacer para que la imagen no se deforme pero que no quede fuera del tamaño adecuado para la card -->
-                <div class="card rounded">
+                <div class="shadow-lg bg-body rounded card rounded">
                     <img src= "{{ url_for('static', filename='img_libro/')}}{{ libro.ruta_foto }}" class="card-img-top"  height="280" alt="">
                     <div class="card-body bg-secondary">
                         <h5 class="card-title"> {{ libro.titulo }}</h5>
                         <p class="card-text">{{ autores.get_by_id(libro.id_autor).nombre }} {{ autores.get_by_id(libro.id_autor).apellido }}</p>
-                        <button type="button" class="btn btn-success ">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
+                        <button type="button" class="btn btn-success ">comprar</button><button type="button" class="btn btn-outline-danger m-1"data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar a favoritos"><i class="bi bi-suit-heart-fill"></i></button>
                         <div class="rating">
-                            <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                            <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                            <label class="star" for="star3" title="Very good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                            <label class="star" for="star2" title="Good" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
-                            <label class="star" for="star1" title="Bad" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star5" title="Malo" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star4" title="Regular" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star3" title="Bueno" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star2" title="Muy Bueno" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
+                            <label class="star" for="star1" title="Exelente" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
                         </div>
                     </div>
                 </div>
@@ -39,7 +37,7 @@
                     <div class="card-body bg-secondary">
                         <h5 class="card-title">Libro title</h5>
                         <p class="card-text">Autor sinopsis del libro</p>
-                        <button type="button" class="btn btn-success m-1">comprar</button><button type="button" class="btn btn-outline-danger m-1"><i class="bi bi-suit-heart-fill"></i></button>
+                        <button type="button" class="btn btn-success m-1">comprar</button><button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar a favoritos"><i class="bi bi-suit-heart-fill"></i></button>
                         <div class="rating">
                             <label class="star" for="star5" title="Awesome" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
                             <label class="star" for="star4" title="Great" aria-hidden="true"><i class="stars bi bi-star-fill"></i></label>
