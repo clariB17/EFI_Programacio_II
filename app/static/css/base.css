@@ -5,23 +5,10 @@
     -o-background-size: cover;
     background-size: cover;
 }
-.foto {
-    background-image: no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-  }
-.user-info {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
 
 .usu {
     text-emphasis-color: black;
-    text-decoration-color: black;
-    
+    text-decoration-color: black;   
 }
 
 
@@ -30,13 +17,17 @@
 }
 
 .usu:hover{
-    background-color: cadetblue;
-    border: solid black 0.1ch;
+    /* background-color: cadetblue; */
+    /* background-color: goldenrod; */
+    /* background-color: #21f0b2da; */
+    /* background-color: #ca9a51; */
+    background-color: #51ca9a;
+    border: solid black 0.1ch;   
 }
 
-.largo{
-    height: 100px
-}
+/* .largo{ */
+    /* height: 100px */
+/* } */
 .ddm{
     background: none;
 }
@@ -51,19 +42,8 @@
 .dropfondo{
     background-color: gray;    
 }
-.si:hover{
-    background-color: rgb(247, 10, 10);
-}
-.sii:hover{
-    background-color: rgb(10, 247, 42);
-}
-.siii:hover{
-    background-color: rgb(10, 34, 247);
-}
-
 .stars:hover{
-    color: #d8d842;
-    
+    color: #d8d842;    
 }
 
 .adm {
@@ -82,6 +62,14 @@
 }
 
 .amarillo {
-    background-color: goldenrod;
+    /* background-color: goldenrod; */
+    /* background-color: cadetblue; */
+    /* background-color: #21f0b2da; */
+    background-color: #ca9a51;
+
 
 }
+
+.img_libros { margin: 0px;
+             width:max-content; 
+             align-items: center; }

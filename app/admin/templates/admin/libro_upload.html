@@ -5,44 +5,44 @@
 {% endblock %}
 
 {% block content %}
-<h5 class="text-center mb-0 font-monospace">Agregar libro nuevo</h5>
+<h5 class="text-center mt-5 font-monospace">Agregar libro nuevo</h5>
 <div class="m-3 border-dark border-1 mx-auto text-center">
     <form  class="border rounded border-dark border-3 p-3 m-3 col-8 mx-auto text-center" action="{{ url_for('admin.libro_upload') }}" method="POST" enctype="multipart/form-data">
         {{  form.hidden_tag() }}
-        <div class="p-2 row ">
-            {{  form.titulo.label( class="col-1")  }}
-            {{  form.titulo(class="col")  }} <br>
+        <div class="p-2 row  ">
+            {{  form.titulo.label( class="col-lg-1 ")  }}
+            {{  form.titulo(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.ISBN.label(class="col-1")  }}
-            {{  form.ISBN(class="col")  }} <br>
+            {{  form.ISBN.label(class="col-lg-1")  }}
+            {{  form.ISBN(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.genero.label(class="col-1")  }}
-            {{  form.genero(class="col")  }} <br>
+            {{  form.genero.label(class="col-lg-1")  }}
+            {{  form.genero(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.autor.label(class="col-1")  }}
-            {{  form.autor(class="col")  }} <br>
+            {{  form.autor.label(class="col-lg-1")  }}
+            {{  form.autor(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.idioma.label(class="col-1")  }}
-            {{  form.idioma(class="col")  }} <br>
+            {{  form.idioma.label(class="col-lg-1")  }}
+            {{  form.idioma(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.precio.label(class="col-1")  }}
-            {{  form.precio(class="col")  }} <br>
+            {{  form.precio.label(class="col-lg-1")  }}
+            {{  form.precio(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.imagen.label(class="col-2 ")  }}
-            {{  form.imagen(class="col ")  }} <br>
+            {{  form.imagen.label(class="col-lg-2 ")  }}
+            {{  form.imagen(class="col usu")  }} <br>
         </div>
         <div class="p-2 ps-0 es-0 row">
-            {{  form.libro.label(class="col-2 ms-0")  }}
-            {{  form.libro(class="col")  }} <br>
+            {{  form.libro.label(class="col-lg-2")  }}
+            {{  form.libro(class="col usu")  }} <br>
         <span class="text-danger">{{ error }}</span>
         </div>
-        {{  form.submit(class="btn btn-outline-success text-center")  }} <br>
+        {{  form.submit(class="btn btn-outline-success text-center")  }}
     </form>
 </div>
 {% endblock %}

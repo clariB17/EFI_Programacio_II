@@ -5,29 +5,29 @@
 {% endblock %}
 
 {% block content %}
-<h5 class="text-center mb-0 font-monospace">Agregar Autor nuevo</h5>
+<h5 class="text-center font-monospace mt-5">Agregar Autor nuevo</h5>
 
     <form class="m-3 p-3 border  rounded border-dark border-3 col-8 mx-auto text-center" action="{{ url_for('admin.autor_upload') }}" method="POST" enctype="multipart/form-data">
         <div class="p-2 row">
             {{  form.hidden_tag() }}
-            {{  form.nombre.label(class="col-2 p-1")  }}
-            {{  form.nombre(class="col ms-0 ps-0")  }} <br>
+            {{  form.nombre.label(class="col-lg-2 p-1")  }}
+            {{  form.nombre(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.apellido.label(class="col-2")  }}
-            {{  form.apellido(class="col ms-0 ps-0")  }} <br>
+            {{  form.apellido.label(class="col-lg-2")  }}
+            {{  form.apellido(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.fecha_de_nacimiento.label(class="col-2")  }}
-            {{  form.fecha_de_nacimiento(class="col ms-0 ps-0")  }} <br>
+            {{  form.fecha_de_nacimiento.label(class="col-lg-2")  }}
+            {{  form.fecha_de_nacimiento(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0 text-center")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.pais.label(class="col-2")  }}
-            {{  form.pais(class="col ms-0 ps-0")  }} <br>
+            {{  form.pais.label(class="col-lg-2")  }}
+            {{  form.pais(class="col ddm border-2 border-warning border-top-0 border-end-0 border-start-0")  }} <br>
         </div>
         <div class="p-2 row">
-            {{  form.imagen.label(class="col-2")  }}
-            {{  form.imagen(class="col ms-0 ps-0")  }} <br>
+            {{  form.imagen.label(class="col-lg-2")  }}
+            {{  form.imagen(class="col ms-0 ps-0 usu")  }} <br>
         </div>
         <span class="text-danger">{{ error }}</span>
         {{  form.submit(class="btn btn-outline-success text-center")  }} <br>

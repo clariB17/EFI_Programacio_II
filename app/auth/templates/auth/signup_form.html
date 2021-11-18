@@ -23,7 +23,7 @@
                 <!-- LA LÍNEA {{ form.hidden_tag() }} AÑADE TODOS LOS CAMPOS DE TIPO HIDDEN DEL form SI LOS HAY. Flask-WTF GENERA PARA TODAS LAS INSTANCIAS DE LA CLASE Flaskform UN CAMPO OCULTO QUE PROTEGE LA APP DE ATAQUES CSRF -->
                 {{ form.hidden_tag() }}
                 <div>
-                    {{ form.name.label (class="m-2") }}
+                    {{ form.name.label (class="m-2 ddm") }}
                     {{ form.name(class="ddm border-2 col-8  border-warning border-top-0 border-end-0 border-start-0") }}<br>
                     <!-- LE MOSTRAMOS AL USUARIO EL ERROR DE VALIDACIÓN -->
                     {% for error in form.name.errors %}
