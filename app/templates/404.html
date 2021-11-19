@@ -1,5 +1,8 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    Ooops!! La página que buscas no existe xD
+    <div class="fondo404 text-center">
+        <h3 class="m-2 mb-5 mt-3">Ooops!! La página que buscas no existe xD</h3>
+        <a class="btn usu mt-5 " href="{{ url_for('public.index') }}">Volver a pagina principal</a>
+    </div>
 {% endblock %}

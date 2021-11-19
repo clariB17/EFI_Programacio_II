@@ -5,6 +5,16 @@
     -o-background-size: cover;
     background-size: cover;
 }
+.fondo404 {
+    background: url(../img/247.Erro404.jpg) no-repeat center center;
+    min-height: 100vh;
+
+}
+
+.fondo401 {
+    background: url(../img/error401.jpg)no-repeat center center;
+    min-height: 100vh;
+}
 
 .usu {
     text-emphasis-color: black;
