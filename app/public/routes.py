@@ -9,11 +9,14 @@ import os
 def index(): 
     libros = Libro.get_last()
     autores = Autor
-    likes = Deseados.get_by_id_user(current_user.id)
+    likes = []
+    if current_user.is_authenticated:
+        likes = Deseados.get_by_id_user(current_user.id)
     return render_template("public/index.html", libros=libros, autores=autores, likes=likes)
 
-@login_required
+
 @public_bp.route('/<id_libro>/<page>')
+@login_required
 def like(id_libro, page):
     previus = Deseados.get_liked(current_user.id ,id_libro)
     if previus:
