@@ -8,11 +8,7 @@ from .forms import Libros_upload, Autores_upload
 from werkzeug.utils import secure_filename
 from extension_file import imagen_permitida, libro_permitido
 import os
-
-
-FOLDER_LIBRO = os.path.abspath('app/static/libros')
-FOLDER_IMAGEN_LIBRO = os.path.abspath('app/static/img_libro')
-FOLDER_IMAGEN_AUTOR = os.path.abspath('app/static/img_autor')
+from app import FOLDER_IMAGEN_AUTOR, FOLDER_IMAGEN_LIBRO, FOLDER_LIBRO
 
 @admin_bp.route("/admin/libro_upload/", methods=['GET', 'POST'])
 @login_required
