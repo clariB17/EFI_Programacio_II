@@ -33,7 +33,9 @@ def like(id_libro, page):
 def all_libros():
     libros = Libro.get_all()
     autores = Autor
-    likes = Deseados.get_by_id_user(current_user.id)
+    likes = []
+    if current_user.is_authenticated:
+        likes = Deseados.get_by_id_user(current_user.id)
     return render_template("public/libros.html", libros=libros, autores=autores, likes=likes)
 
 # para leer libros
