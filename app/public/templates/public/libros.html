@@ -13,8 +13,6 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto container">
         {% for libro in libros %}
             <div class="col mx-auto g-5">
-                <!-- creo que hay que no se esta guardando bien la ruta de la imagen de la tapa del libro 
-                    como hacer para que la imagen no se deforme pero que no quede fuera del tamaño adecuado para la card -->
                 <div class="card rounded">
                     <div class="align-items-center usu gris">
                         <img src= "{{ url_for('static', filename='img_libro/')}}{{ libro.ruta_foto }}" class="card-img-top img_libros"  height="280" alt="">
