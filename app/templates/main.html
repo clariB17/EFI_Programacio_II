@@ -28,19 +28,19 @@
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="menuizquiera">
             <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="{{ url_for('public.index') }}">
+            <a class="navbar-brand mt-2 mt-lg-0 p-0 usu" href="{{ url_for('public.index') }}">
                 <img src="{{url_for('static', filename='img/books_icon.ico')}}"class="rounded-3" height="45" alt="" loading="lazy"/>
             </a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"  aria-label="Toggle navigation">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Libros</a>
+                    <a class="nav-link" href="{{ url_for('public.all_libros') }}">Libros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contactos</a>
+                    <a class="nav-link" href="{{ url_for('public.contacto') }}">Contactos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Acerca de nosotros</a>
+                    <a class="nav-link" href="{{ url_for('public.acerca') }}">Acerca de nosotros</a>
                 </li>
             </ul>
                 <!-- Left links -->
@@ -80,10 +80,12 @@
                 <a  class="dropdown-toggle d-flex align-items-center hidden-arrow link-dark " id="menuderecha" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                 <ul class="gris dropdown-menu dropdown-menu-end " aria-labelledby="menuderecha">
                     <li>
-                        <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.libro_upload') }}">M Biblioteca</a>        
+                        <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('public.mibiblioteca') }}">Mi Biblioteca</a>
+                           <!-- hacer ruta para mi biblioteca  -->
                     </li>
                     <li>
-                        <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('admin.autor_upload') }}">Mis Favoritos</a>        
+                        <a type="button" class="dropdown-item border border-top-0" href="{{ url_for('public.misfavoritos') }}">Mis Favoritos</a>
+                           <!-- hacer ruta para mis favoritos   -->
                     </li>
                     <li>
                         <a type="button" class="dropdown-item border border-top-0" href="#">Preferencias</a>
@@ -98,23 +100,24 @@
         </div>
     </nav>
 <!-- BLOQUE DE CONTENIDO -->
-    {% block content %}{% endblock %}
-    
-    <footer class="bg-dark text-center text-white sticky-sm-bottom fixed-bottom">
+    <div class="contenido">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="bg-dark text-center text-white sticky-sm-bottom ">
         <!-- Grid container -->
         <div class="container p-1 pb-0">
           <!-- Section: Social media -->
           <section class="mb-1">
             <!-- Facebook -->
-            <a class="btn btn-outline-danger btn-floating m-1" href="#!" role="button"
+            <a class="btn btn-outline-danger btn-floating m-1" href="https://www.instagram.com/?hl=es" role="button"
               ><i class="bi bi-instagram"></i></a>
             <!-- Instagram -->
-            <a class="btn btn-outline-primary btn-floating m-1" href="#!" role="button"
+            <a class="btn btn-outline-primary btn-floating m-1" href="https://www.facebook.com/cantarodepiedra/" role="button"
               ><i class="bi bi-facebook"></i></a>
           </section>
         </div>
         <!-- Copyright -->
-        <div class="text-center" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center bg-" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2021 Copyright:
           <a class="text-white" href="https://google.com/">cantarodepiedra.com</a>
         </div>

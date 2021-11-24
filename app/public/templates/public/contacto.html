@@ -1,0 +1,51 @@
+<!-- CARGAMOS COMO EXTEND LA PLANTILLA BASE -->
+{% extends "main.html" %}
+<!-- CARGAMOS CONTENIDO EN EL BLOQUE DE TITULO -->
+{% block title %}HOME CANTARO DE PIEDRA{% endblock %}
+<!-- CARGAMOS CONTENIDO EN EL BLOQUE DE CONTENIDOS -->
+{% block content %}
+<div class="text-center mt-5 conteiner mb-5">
+      
+    <h1 class="">
+        Contactos editorial Cantaro de piedra
+    </h1>
+    <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 mx-auto container">
+        <div class="col g-5 border-5 border-warning">
+            <div class="card gris">
+                <img src="{{url_for('static', filename='img/moyano.jpg')}}" class="mx-auto card-img-top img_libros" height="200" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Marissa Moyano</h5>
+                  <p class="card-text">Docente universitaria. Magister en Literatura Hispanoamericana.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item gris">Telefono <a href="">+54358-4123456</a></li>
+                  <li class="list-group-item gris">Celular <a href="">+5435-8461234</a></li>
+                  <li class="list-group-item gris"><i class="bi bi-google me-1"></i><a class="text-decoration-none fst-italic text-black" href="#">  marisamoyano@google.com</a></li>
+                  <li class="list-group-item gris"><i class="bi bi-facebook me-1"></i><a class="text-decoration-none fst-italic text-black"  href="#"> /marisamoyano</a></li>
+                  <li class="list-group-item gris"><i class="bi bi-instagram me-1"></i><a class="text-decoration-none fst-italic text-black" href="#">  /marisa_moyano</a></li>
+    
+                </ul>
+            </div>
+        </div>
+        <div class="col g-5">
+            <div class="card gris ">
+                <img src="{{url_for('static', filename='img/hugo.jpg')}}" class="card-img-top img_libros mx-auto"  height="208" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Hugo Aguilar</h5>
+                  <p class="card-text">Docente universitario. Magister en Literatura Hispanoamericana.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item gris">Telefono <a href="">+54358-4123456</a></li>
+                  <li class="list-group-item gris">Celular <a href="">+5435-8461234</a></li>
+                  <li class="list-group-item gris"><i class="bi bi-google me-1"></i><a class="text-decoration-none fst-italic text-black" href="#">  hugoaguilar@google.com</a></li>
+                  <li class="list-group-item gris"><i class="bi bi-facebook me-1"></i><a class="text-decoration-none fst-italic text-black"  href="#"> /hugoaguilar</a></li>
+                  <li class="list-group-item gris"><i class="bi bi-instagram me-1"></i><a class="text-decoration-none fst-italic text-black" href="#">  /hugo_aguilar</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

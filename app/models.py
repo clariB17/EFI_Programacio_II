@@ -51,6 +51,13 @@ class Libro(db.Model):
     @staticmethod
     def get_all():
         return Libro.query.all()
+    
+    @staticmethod
+    def get_last():
+        if len(Libro.get_all()) >= 3:
+            obj = Libro.query.all()
+            return obj[-3] , obj[-2], obj[-1]
+        return Libro.get_all()
 
 
 # sobre el libro
@@ -238,13 +245,6 @@ class Deseados(db.Model):
     id_libro = db.Column(db.Integer, db.ForeignKey('libro.id'), nullable=False)
     id_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self, nombre, id_user = None):
-        self.nombre = nombre
-        self.id_user = id_user
-
-    def __repr__(self):
-        return '<user {self.id_user}'
-
     def save(self):
         if not self.id:
             db.session.add(self)
@@ -257,6 +257,10 @@ class Deseados(db.Model):
     @staticmethod
     def get_by_id_user(id_user):
         return Deseados.query.filter_by(id_user=id_user).all()
+    
+    @staticmethod
+    def get_liked(id_user, id_libro):
+        return Deseados.query.filter_by(id_user=id_user, id_libro=id_libro).first()
 
 class Factura(db.Model):
     id = db.Column(db.Integer, primary_key = True)

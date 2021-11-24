@@ -31,15 +31,5 @@ class Autores_upload(FlaskForm):
     submit = SubmitField(label='Guardar')
 
 
-class PostForm(FlaskForm):
-    title = StringField('Título', validators=[DataRequired(), Length(max=128)])
-    content = TextAreaField('Contenido')
-    submit = SubmitField('Enviar')
-
-class UserAdminForm(FlaskForm):
-    is_admin = BooleanField('Administrador')
-    submit = SubmitField('Guardar')
-
-
 
     

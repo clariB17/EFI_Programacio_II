@@ -1,5 +1,10 @@
 {% extends 'main.html' %}
 
 {% block content %}
+<div>
+    <img src= "{{ url_for('static', filename='img/error500.jpg')}}" class="card-img-top img_libros"  height="280" alt="">
+</div>
+<div>
     Ooops!! Parece que ha habido un error :(
+</div>
 {% endblock %}

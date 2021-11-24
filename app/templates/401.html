@@ -1,7 +1,18 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<dir class="m-5">
-    Ooops!! No tenés permisos de acceso
-</dir>
+<div class="fondo401 text-black-50">
+    <div class="m-2 text-center">
+        Ooops!! No tenés permisos de acceso
+        <a class="btn usu" href="{{ url_for('public.index') }}">Volver a pagina principal</a>
+    </div> 
+    <div class="row justify-content-between ms-5">
+        <div class="col-10">
+            <h2>ERROR 404</h2>
+        </div>
+        <div class="col">
+            <h2>ERROR 404</h2>
+        </div>
+    </div>
+</div>
 {% endblock %}
